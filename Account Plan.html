@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enterprise Account Plan</title>
+  <title>Enterprise Account Planning UI</title>
   <style>
     :root {
-      --bg: #f3f5f9;
+      --bg: #f4f7fc;
       --surface: #ffffff;
-      --border: #dbe2ef;
-      --text: #1f2a44;
-      --muted: #667085;
-      --primary: #2854d6;
-      --primary-soft: #e8eeff;
-      --success: #0f9d58;
-      --warning: #c97a00;
-      --danger: #c62828;
-      --radius: 14px;
-      --shadow: 0 10px 22px rgba(16, 24, 40, 0.08);
+      --surface-soft: #f8faff;
+      --border: #d9e3f3;
+      --text: #15223d;
+      --muted: #5d6b85;
+      --accent: #1f57d6;
+      --accent-soft: #e9f0ff;
+      --success: #1f8a4c;
+      --warning: #b7791f;
+      --danger: #c53030;
+      --whitespace: #ef7c2c;
+      --radius: 16px;
+      --shadow: 0 12px 26px rgba(18, 33, 63, 0.08);
     }
 
     * {
@@ -28,16 +30,16 @@
       margin: 0;
       background: var(--bg);
       color: var(--text);
-      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
       line-height: 1.5;
     }
 
-    .page {
-      max-width: 1200px;
+    .app {
+      max-width: 1460px;
       margin: 0 auto;
-      padding: 24px;
+      padding: 18px;
       display: grid;
-      gap: 18px;
+      gap: 14px;
     }
 
     .card {
@@ -45,449 +47,1870 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 18px;
     }
 
-    .topbar {
+    .toolbar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 20px;
       flex-wrap: wrap;
     }
 
-    .title {
-      margin: 0;
-      font-size: 1.55rem;
+    .eyebrow {
+      margin: 0 0 4px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
       font-weight: 700;
     }
 
-    .subtitle {
-      margin: 2px 0 0;
+    .toolbar h1 {
+      margin: 0;
+      font-size: 1.72rem;
+      letter-spacing: -0.01em;
+    }
+
+    .subhead {
+      margin: 6px 0 0;
       color: var(--muted);
       font-size: 0.95rem;
+      max-width: 660px;
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      background: #ecfdf3;
-      color: var(--success);
-      border: 1px solid #b7ebce;
-      padding: 6px 10px;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--success);
-    }
-
-    .button-group {
+    .toolbar-actions {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
 
     button {
-      border-radius: 10px;
       border: 1px solid var(--border);
-      padding: 9px 13px;
-      font-weight: 600;
-      cursor: pointer;
       background: #fff;
       color: var(--text);
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 40px;
     }
 
-    .primary {
-      background: var(--primary);
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
       color: #fff;
-      border-color: var(--primary);
     }
 
-    .summary-grid {
+    button.ghost {
+      background: var(--surface-soft);
+    }
+
+    .workspace {
       display: grid;
-      grid-template-columns: repeat(4, minmax(140px, 1fr));
-      gap: 12px;
-    }
-
-    .summary-item {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 12px;
-      background: linear-gradient(180deg, #fff 0%, #fafcff 100%);
-    }
-
-    .summary-label {
-      margin: 0;
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .summary-value {
-      margin: 8px 0 0;
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    .section-grid {
-      display: grid;
-      grid-template-columns: 1.25fr 1fr;
+      grid-template-columns: minmax(330px, 380px) minmax(0, 1fr);
       gap: 14px;
+      align-items: start;
     }
 
-    .section-title {
-      margin: 0 0 12px;
-      font-size: 1.08rem;
-      font-weight: 700;
+    .input-panel {
+      padding: 16px;
+      position: sticky;
+      top: 14px;
+      max-height: calc(100vh - 28px);
+      overflow: auto;
     }
 
-    .plan-banner {
-      background: var(--primary-soft);
-      border: 1px solid #c7d6ff;
-      border-radius: 12px;
-      padding: 14px;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .plan-name {
-      font-size: 1.06rem;
+    .input-panel h2 {
       margin: 0;
-      font-weight: 700;
+      font-size: 1.15rem;
     }
 
-    .plan-price {
-      margin: 4px 0 0;
-      color: #2f3f66;
-      font-size: 0.95rem;
+    .panel-copy {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
     }
 
-    .list {
-      margin: 14px 0 0;
-      padding-left: 18px;
+    .form-section {
+      margin-top: 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .form-section h3 {
+      margin: 0 0 10px;
+      font-size: 0.96rem;
+      letter-spacing: 0.01em;
+    }
+
+    .form-grid {
       display: grid;
-      gap: 8px;
-      color: #2d3c5a;
-    }
-
-    .kv {
-      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
       gap: 10px;
     }
 
-    .kv-row {
+    .form-grid.compact-three {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      font-size: 0.81rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    label.is-disabled {
+      opacity: 0.55;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+      padding: 8px 10px;
+      color: var(--text);
+      font: inherit;
+      font-size: 0.88rem;
+      min-height: 38px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 76px;
+      line-height: 1.45;
+    }
+
+    input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      min-height: auto;
+      margin: 0;
+    }
+
+    input[type="range"] {
+      padding: 0;
+      min-height: auto;
+      height: 6px;
+      accent-color: var(--accent);
+    }
+
+    .range-label {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      border-bottom: 1px dashed var(--border);
-      padding-bottom: 9px;
+      gap: 10px;
     }
 
-    .kv-label {
+    .pill-number {
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid #bdd0fb;
+      background: #edf4ff;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: #fbfdff;
+      margin-bottom: 10px;
+    }
+
+    .toggle-row span {
+      font-size: 0.82rem;
       color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .kv-value {
       font-weight: 600;
-      text-align: right;
     }
 
-    .usage-grid {
+    .product-selector {
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fbfdff;
+      margin: 0;
       display: grid;
-      grid-template-columns: repeat(3, minmax(150px, 1fr));
-      gap: 12px;
+      gap: 8px;
     }
 
-    .meter {
+    .product-selector legend {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 700;
+      padding: 0 6px;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+    }
+
+    .checkbox-grid label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .goal-input {
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 12px;
+      padding: 10px;
       background: #fcfdff;
+      margin-top: 10px;
     }
 
-    .meter h4 {
+    .goal-input h4 {
+      margin: 0 0 8px;
+      font-size: 0.9rem;
+    }
+
+    .summary-panel {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-panel > .card {
+      padding: 16px;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .owner-card {
+      border: 1px solid #cfe0ff;
+      background: linear-gradient(180deg, #fbfdff 0%, #f3f8ff 100%);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .owner-card h2,
+    .metrics-card h2 {
       margin: 0;
-      font-size: 0.92rem;
+      font-size: 1.02rem;
     }
 
-    .meter p {
-      margin: 5px 0 10px;
+    .key-value {
+      margin: 12px 0 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .key-value div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 7px;
+    }
+
+    .key-value dt {
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
     }
 
-    .track {
-      width: 100%;
-      height: 8px;
-      border-radius: 999px;
-      background: #e7ecf5;
-      overflow: hidden;
+    .key-value dd {
+      margin: 0;
+      text-align: right;
+      font-size: 0.88rem;
+      font-weight: 700;
+      max-width: 56%;
     }
 
-    .fill {
-      height: 100%;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #4f7bff 0%, #2854d6 100%);
-      width: 0;
-      transition: width 400ms ease;
+    .metrics-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--surface-soft);
+      display: grid;
+      gap: 12px;
     }
 
-    .fill.warning {
-      background: linear-gradient(90deg, #ffcb66 0%, #f3a41f 100%);
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 8px;
     }
 
-    .fill.danger {
-      background: linear-gradient(90deg, #f28e8e 0%, #d64646 100%);
+    .kpi-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px;
+      background: #fff;
     }
 
-    .table-wrap {
-      overflow-x: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 580px;
-    }
-
-    th,
-    td {
-      text-align: left;
-      padding: 10px 8px;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.93rem;
-    }
-
-    th {
+    .kpi-item p {
+      margin: 0;
       color: var(--muted);
-      font-weight: 600;
-      font-size: 0.82rem;
+      font-size: 0.77rem;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
 
-    .tag {
-      display: inline-block;
-      border-radius: 999px;
-      padding: 4px 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      border: 1px solid transparent;
+    .kpi-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
     }
 
-    .tag.active {
-      background: #ecfdf3;
-      border-color: #b7ebce;
+    .split-card {
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: #fff;
+      padding: 9px 10px;
+    }
+
+    .split-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.83rem;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .split-labels strong {
+      color: var(--text);
+      margin-left: 6px;
+      font-size: 0.9rem;
+    }
+
+    .split-bar {
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      background: #ecf0f9;
+    }
+
+    .split-bar span {
+      height: 100%;
+      display: block;
+      transition: width 250ms ease;
+    }
+
+    .split-bar .direct {
+      background: linear-gradient(90deg, #4574ef 0%, #1f57d6 100%);
+    }
+
+    .split-bar .indirect {
+      background: linear-gradient(90deg, #98b2f5 0%, #7697ea 100%);
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .two-column h2 {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+    }
+
+    .two-column h3 {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+    }
+
+    .bar-group {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .bar-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .bar-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .bar-track {
+      height: 9px;
+      border-radius: 999px;
+      background: #e7edf9;
+      border: 1px solid #d6e1f6;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      min-width: 2px;
+    }
+
+    .bar-fill.tone-1 {
+      background: linear-gradient(90deg, #4f7ef8 0%, #1f57d6 100%);
+    }
+
+    .bar-fill.tone-2 {
+      background: linear-gradient(90deg, #6e9cfb 0%, #3f70e8 100%);
+    }
+
+    .bar-fill.tone-3 {
+      background: linear-gradient(90deg, #8cb2ff 0%, #5a86ea 100%);
+    }
+
+    .bar-fill.tone-4 {
+      background: linear-gradient(90deg, #b3cbff 0%, #86a7ef 100%);
+    }
+
+    .caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 7px;
+      font-size: 0.9rem;
+    }
+
+    .bullet-list.compact {
+      gap: 5px;
+      font-size: 0.85rem;
+    }
+
+    .muted-item {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .trend-panel {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      background: #fcfdff;
+    }
+
+    .trend-panel h3 {
+      margin: 0 0 12px;
+    }
+
+    .trend-chart {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 10px;
+      min-height: 145px;
+    }
+
+    .trend-col {
+      flex: 1;
+      min-width: 88px;
+      text-align: center;
+      display: grid;
+      gap: 7px;
+      justify-items: center;
+    }
+
+    .trend-track {
+      width: 30px;
+      height: 102px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #eef3fb;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: end;
+    }
+
+    .trend-fill {
+      width: 100%;
+      height: 0;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #4f7ef8 0%, #1f57d6 100%);
+      transition: height 280ms ease;
+    }
+
+    .trend-col span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .trend-col strong {
+      font-size: 0.87rem;
+    }
+
+    details.account-lens {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    details.account-lens summary {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      user-select: none;
+    }
+
+    details.account-lens summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-note {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .details-hint {
+      color: var(--muted);
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    details.account-lens > div {
+      padding: 14px 16px 16px;
+    }
+
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 8px 0 12px;
+      flex-wrap: wrap;
+    }
+
+    .donut {
+      width: 136px;
+      height: 136px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent) 0 50%, #f7c79f 50% 100%);
+      display: grid;
+      place-items: center;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    .donut::after {
+      content: "";
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid var(--border);
+      position: absolute;
+    }
+
+    .donut span {
+      position: relative;
+      z-index: 2;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .donut-label {
+      margin: 4px 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .donut-label strong {
+      color: var(--text);
+      margin-right: 6px;
+    }
+
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .pill.owned {
+      background: #eaf8f0;
+      border-color: #bde6ce;
       color: var(--success);
     }
 
-    .tag.pending {
-      background: #fff9eb;
-      border-color: #f7dc9c;
-      color: var(--warning);
+    .pill.whitespace {
+      background: #fff1e5;
+      border-color: #f6c89f;
+      color: #ba5a18;
     }
 
-    @media (max-width: 980px) {
-      .summary-grid {
-        grid-template-columns: repeat(2, minmax(140px, 1fr));
-      }
+    .swot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
 
-      .section-grid {
+    .swot {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      background: #fcfdff;
+      min-height: 172px;
+    }
+
+    .swot h3 {
+      margin: 0 0 8px;
+      font-size: 0.93rem;
+    }
+
+    .swot.swot-strength {
+      border-left: 4px solid var(--success);
+    }
+
+    .swot.swot-weakness {
+      border-left: 4px solid var(--danger);
+    }
+
+    .swot.swot-opportunity {
+      border-left: 4px solid var(--accent);
+    }
+
+    .swot.swot-threat {
+      border-left: 4px solid var(--warning);
+    }
+
+    .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .goal-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      background: #fcfdff;
+      display: grid;
+      gap: 8px;
+    }
+
+    .goal-card h3 {
+      margin: 0;
+      font-size: 0.92rem;
+    }
+
+    .goal-card .goal-objective {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .goal-meta {
+      margin: 0;
+      display: grid;
+      gap: 5px;
+    }
+
+    .goal-meta div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .goal-meta strong {
+      color: var(--text);
+      text-align: right;
+      font-size: 0.84rem;
+    }
+
+    .summary-footer h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .summary-footer p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .timestamp strong {
+      color: var(--text);
+    }
+
+    body.presentation-mode .workspace {
+      grid-template-columns: 1fr;
+    }
+
+    body.presentation-mode .input-panel {
+      display: none;
+    }
+
+    body.presentation-mode .toolbar {
+      position: sticky;
+      top: 8px;
+      z-index: 20;
+    }
+
+    body.presentation-mode .details-hint {
+      display: none;
+    }
+
+    @media (max-width: 1220px) {
+      .workspace {
         grid-template-columns: 1fr;
       }
 
-      .usage-grid {
+      .input-panel {
+        position: static;
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+      }
+
+      .swot-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 560px) {
-      .page {
-        padding: 16px;
+    @media (max-width: 620px) {
+      .app {
+        padding: 12px;
       }
 
-      .summary-grid {
+      .toolbar h1 {
+        font-size: 1.42rem;
+      }
+
+      .kpi-grid {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .app {
+        max-width: none;
+        padding: 0;
+      }
+
+      .toolbar {
+        box-shadow: none;
+        border-color: #cdd5e5;
+      }
+
+      #presentationToggle {
+        display: none;
+      }
+
+      .input-panel {
+        display: none;
+      }
+
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        box-shadow: none;
+        border-color: #cfd8eb;
       }
     }
   </style>
 </head>
 <body>
-  <main class="page" aria-label="Enterprise account plan page">
-    <section class="card topbar">
+  <div class="app">
+    <header class="toolbar card">
       <div>
-        <h1 class="title">Northstar Financial Group</h1>
-        <p class="subtitle">Enterprise account plan and subscription overview</p>
+        <p class="eyebrow">Enterprise Account Planning UI</p>
+        <h1 id="outHeaderCustomer">Northstar Financial Group</h1>
+        <p class="subhead">
+          Executive account plan optimized for immediate insight, structured input, and presentation-ready output.
+        </p>
       </div>
-      <div class="button-group">
-        <span class="pill"><span class="dot" aria-hidden="true"></span> Active contract</span>
-        <button type="button">Download contract</button>
-        <button type="button" class="primary">Manage add-ons</button>
+      <div class="toolbar-actions">
+        <button type="button" id="presentationToggle" class="ghost" aria-pressed="false">Enter presentation mode</button>
+        <button type="button" id="exportPdf" class="primary">Export PDF / Print brief</button>
       </div>
-    </section>
+    </header>
 
-    <section class="card summary-grid" aria-label="Plan summary">
-      <article class="summary-item">
-        <p class="summary-label">Plan tier</p>
-        <p class="summary-value">Enterprise Plus</p>
-      </article>
-      <article class="summary-item">
-        <p class="summary-label">Billing cycle</p>
-        <p class="summary-value">Annual</p>
-      </article>
-      <article class="summary-item">
-        <p class="summary-label">Renewal date</p>
-        <p class="summary-value">Aug 15, 2026</p>
-      </article>
-      <article class="summary-item">
-        <p class="summary-label">Current ARR</p>
-        <p class="summary-value">$84,000 / year</p>
-      </article>
-    </section>
+    <div class="workspace">
+      <aside class="input-panel card" id="inputPanel" aria-label="Account planning input section">
+        <h2>Input workspace</h2>
+        <p class="panel-copy">Edit structured and unstructured fields to update the executive summary in real time.</p>
 
-    <div class="section-grid">
-      <section class="card" aria-label="Plan details">
-        <h2 class="section-title">Plan details</h2>
-        <div class="plan-banner">
-          <div>
-            <p class="plan-name">Enterprise Plus</p>
-            <p class="plan-price">$7,000 monthly equivalent · 200 seats included</p>
-          </div>
-          <button type="button" class="primary">Request upgrade</button>
-        </div>
-        <ul class="list">
-          <li>Unlimited projects, environments, and API calls</li>
-          <li>SAML SSO with SCIM user provisioning</li>
-          <li>Dedicated account manager and SLA-backed support</li>
-          <li>Advanced analytics and audit log retention (5 years)</li>
-          <li>Custom security controls and private networking</li>
-        </ul>
-      </section>
+        <form id="planningForm" novalidate>
+          <section class="form-section">
+            <h3>1. Account Executive and Ownership</h3>
+            <div class="form-grid">
+              <label>
+                Customer name
+                <input id="customerName" type="text" value="Northstar Financial Group" />
+              </label>
+              <label>
+                Account executive name
+                <input id="aeName" type="text" value="Dana Morales" />
+              </label>
+              <label>
+                Ownership type
+                <select id="ownershipType">
+                  <option value="local">Local Owner</option>
+                  <option value="global" selected>Global Owner</option>
+                </select>
+              </label>
+              <label>
+                Role and region
+                <input id="roleRegion" type="text" value="Global Strategic AE, EMEA + Americas" />
+              </label>
+              <label>
+                Direct manager
+                <input id="directManager" type="text" value="VP Enterprise Sales - Priya Raman" />
+              </label>
+              <label>
+                Matrixed reporting (if applicable)
+                <input id="matrixReporting" type="text" value="Matrixed to Global Industry GTM Lead and Regional COO" />
+              </label>
+            </div>
+          </section>
 
-      <section class="card" aria-label="Billing and contacts">
-        <h2 class="section-title">Billing and contacts</h2>
-        <div class="kv">
-          <div class="kv-row">
-            <span class="kv-label">Primary billing contact</span>
-            <span class="kv-value">maya.chen@northstar.com</span>
+          <section class="form-section">
+            <h3>2. Account and Revenue Metrics</h3>
+            <div class="form-grid">
+              <label>
+                Annual Recurring Revenue (USD)
+                <input id="arrTotal" type="number" min="0" step="1000000" value="84000000" />
+              </label>
+              <label>
+                Employees at customer
+                <input id="employees" type="number" min="0" step="100" value="18500" />
+              </label>
+              <label>
+                Customer total revenue (USD)
+                <input id="customerTotalRevenue" type="number" min="0" step="10000000" value="4600000000" />
+              </label>
+              <label>
+                Priority countries/markets
+                <input id="topCountries" type="text" value="United States, Germany, Japan, Brazil" />
+              </label>
+            </div>
+
+            <div class="form-grid" style="margin-top: 10px;">
+              <label>
+                ARR Pillar: Platform
+                <input id="arrPillarPlatform" type="number" min="0" step="500000" value="28000000" />
+              </label>
+              <label>
+                ARR Pillar: Security
+                <input id="arrPillarSecurity" type="number" min="0" step="500000" value="22000000" />
+              </label>
+              <label>
+                ARR Pillar: Data and AI
+                <input id="arrPillarData" type="number" min="0" step="500000" value="18000000" />
+              </label>
+              <label>
+                ARR Pillar: Services
+                <input id="arrPillarServices" type="number" min="0" step="500000" value="16000000" />
+              </label>
+            </div>
+
+            <div class="form-grid" style="margin-top: 10px;">
+              <label>
+                Global revenue: Americas (USD)
+                <input id="revAmer" type="number" min="0" step="500000" value="39000000" />
+              </label>
+              <label>
+                Global revenue: EMEA (USD)
+                <input id="revEmea" type="number" min="0" step="500000" value="23000000" />
+              </label>
+              <label>
+                Global revenue: APAC (USD)
+                <input id="revApac" type="number" min="0" step="500000" value="16000000" />
+              </label>
+              <label>
+                Global revenue: LATAM (USD)
+                <input id="revLatam" type="number" min="0" step="500000" value="6000000" />
+              </label>
+            </div>
+
+            <div style="margin-top: 10px;">
+              <label>
+                <span class="range-label">
+                  Direct revenue split
+                  <span class="pill-number" id="directSplitLive">62%</span>
+                </span>
+                <input id="directSplit" type="range" min="0" max="100" step="1" value="62" />
+              </label>
+            </div>
+
+            <div style="margin-top: 10px;">
+              <div class="toggle-row">
+                <span>CPO present?</span>
+                <input id="cpoPresent" type="checkbox" checked />
+              </div>
+              <label id="procurementReportsToLabel">
+                If no CPO, procurement reports to
+                <select id="procurementReportsTo">
+                  <option value="CFO">CFO</option>
+                  <option value="COO">COO</option>
+                  <option value="CIO">CIO</option>
+                  <option value="Chief Legal Officer">Chief Legal Officer</option>
+                  <option value="Shared Services">Shared Services</option>
+                </select>
+              </label>
+              <label style="margin-top: 10px;">
+                Procurement structure notes
+                <textarea id="procurementNotes">Centralized sourcing model with regional buying teams in EMEA and APAC.</textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h3>3. Industry Lens</h3>
+            <label>
+              Key industry trends (one per line)
+              <textarea id="industryTrends">Digital core modernization accelerating in tier-1 banks.
+Increased supervisory pressure on operational resilience.
+AI governance becoming a board-level discussion.
+Vendor consolidation programs tied to cost optimization.</textarea>
+            </label>
+            <label style="margin-top: 10px;">
+              Analyst and benchmark signals (one per line)
+              <textarea id="analystBenchmarks">Analyst forecast: 9% CAGR in enterprise workflow platforms through 2029.
+Peer benchmark: top quartile institutions run 25% fewer strategic vendors.
+Regulatory update: expanded controls around third-party risk and data lineage.</textarea>
+            </label>
+            <div class="form-grid" style="margin-top: 10px;">
+              <label>
+                Market growth (%)
+                <input id="marketGrowth" type="number" min="0" max="40" step="0.1" value="7.2" />
+              </label>
+              <label>
+                Digital investment growth (%)
+                <input id="digitalGrowth" type="number" min="0" max="50" step="0.1" value="11.4" />
+              </label>
+              <label>
+                Regulatory intensity (0-10)
+                <input id="regulatoryPressure" type="number" min="0" max="10" step="0.1" value="6.0" />
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h3>4. Account Lens</h3>
+            <label>
+              Strategic initiatives (one per line)
+              <textarea id="strategicInitiatives">Consolidate digital onboarding platforms into one operating model.
+Expand automation in risk, fraud, and compliance workflows.
+Increase cloud-native deployment footprint to improve release velocity.
+Launch enterprise AI controls program with measurable governance metrics.</textarea>
+            </label>
+            <label style="margin-top: 10px;">
+              Pertinent account information (one per line)
+              <textarea id="accountNotes">New CIO joined in Q4 with mandate for platform simplification.
+Acquired a regional payments processor in APAC.
+Investor communication highlights margin expansion through process efficiency.
+Board approved a 3-year transformation funding package.</textarea>
+            </label>
+          </section>
+
+          <section class="form-section">
+            <h3>5. Product Whitespace Analysis</h3>
+            <fieldset class="product-selector">
+              <legend>Products currently owned</legend>
+              <div class="checkbox-grid">
+                <label><input type="checkbox" data-product="Platform Core" checked />Platform Core</label>
+                <label><input type="checkbox" data-product="Security Suite" checked />Security Suite</label>
+                <label><input type="checkbox" data-product="Data Cloud" checked />Data Cloud</label>
+                <label><input type="checkbox" data-product="AI Copilot" />AI Copilot</label>
+                <label><input type="checkbox" data-product="Workflow Automation" />Workflow Automation</label>
+                <label><input type="checkbox" data-product="Observability" />Observability</label>
+                <label><input type="checkbox" data-product="Compliance Manager" checked />Compliance Manager</label>
+                <label><input type="checkbox" data-product="Partner Exchange" />Partner Exchange</label>
+                <label><input type="checkbox" data-product="Premium Support" checked />Premium Support</label>
+              </div>
+            </fieldset>
+            <label style="margin-top: 10px;">
+              Whitespace opportunity notes
+              <textarea id="whitespaceNotes">Prioritize AI Copilot and Workflow Automation in retail operations and fraud control functions.</textarea>
+            </label>
+          </section>
+
+          <section class="form-section">
+            <h3>6. SWOT Analysis</h3>
+            <label>
+              Strengths (3-5 evidence-based points)
+              <textarea id="swotStrengths">Deep executive alignment across CIO and COO organizations.
+Strong platform adoption in mission-critical workflows.
+Proven implementation outcomes with measurable cycle-time reduction.</textarea>
+            </label>
+            <label style="margin-top: 10px;">
+              Weaknesses (3-5 evidence-based points)
+              <textarea id="swotWeaknesses">Limited penetration in APAC business units.
+Complex procurement cycle impacts expansion timing.
+Inconsistent executive narrative across regional teams.</textarea>
+            </label>
+            <label style="margin-top: 10px;">
+              Opportunities (3-5 evidence-based points)
+              <textarea id="swotOpportunities">Cross-sell AI Copilot into high-volume service teams.
+Attach Workflow Automation to resilience programs.
+Expand premium support with transformation governance services.</textarea>
+            </label>
+            <label style="margin-top: 10px;">
+              Threats (3-5 evidence-based points)
+              <textarea id="swotThreats">Competing vendor bundling with aggressive pricing.
+Budget reallocation due to macro pressure.
+Regulatory scrutiny can delay new platform rollouts.</textarea>
+            </label>
+          </section>
+
+          <section class="form-section">
+            <h3>7. Strategic Objectives (SMART Goals, up to 5)</h3>
+
+            <div class="goal-input">
+              <h4>Goal 1</h4>
+              <label>
+                Objective
+                <input id="goal1Objective" type="text" value="Increase AI Copilot ARR by $6M through phased rollout in fraud and service operations." />
+              </label>
+              <div class="form-grid compact-three" style="margin-top: 8px;">
+                <label>
+                  Owner
+                  <input id="goal1Owner" type="text" value="Dana Morales" />
+                </label>
+                <label>
+                  Target metric
+                  <input id="goal1Target" type="text" value="$6M net-new ARR" />
+                </label>
+                <label>
+                  Deadline
+                  <input id="goal1Deadline" type="date" value="2026-09-30" />
+                </label>
+                <label>
+                  Informed by
+                  <select id="goal1Source">
+                    <option selected>SWOT + Whitespace</option>
+                    <option>SWOT</option>
+                    <option>Whitespace</option>
+                    <option>Industry Lens</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="goal-input">
+              <h4>Goal 2</h4>
+              <label>
+                Objective
+                <input id="goal2Objective" type="text" value="Lift EMEA expansion pipeline coverage to 3.2x by aligning procurement and transformation milestones." />
+              </label>
+              <div class="form-grid compact-three" style="margin-top: 8px;">
+                <label>
+                  Owner
+                  <input id="goal2Owner" type="text" value="EMEA Regional Director" />
+                </label>
+                <label>
+                  Target metric
+                  <input id="goal2Target" type="text" value="3.2x qualified pipeline" />
+                </label>
+                <label>
+                  Deadline
+                  <input id="goal2Deadline" type="date" value="2026-08-15" />
+                </label>
+                <label>
+                  Informed by
+                  <select id="goal2Source">
+                    <option>SWOT + Whitespace</option>
+                    <option selected>SWOT</option>
+                    <option>Whitespace</option>
+                    <option>Industry Lens</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="goal-input">
+              <h4>Goal 3</h4>
+              <label>
+                Objective
+                <input id="goal3Objective" type="text" value="Secure board-level commitment for a three-year platform standardization roadmap." />
+              </label>
+              <div class="form-grid compact-three" style="margin-top: 8px;">
+                <label>
+                  Owner
+                  <input id="goal3Owner" type="text" value="Global CIO Sponsor" />
+                </label>
+                <label>
+                  Target metric
+                  <input id="goal3Target" type="text" value="Signed roadmap + executive steering cadence" />
+                </label>
+                <label>
+                  Deadline
+                  <input id="goal3Deadline" type="date" value="2026-12-15" />
+                </label>
+                <label>
+                  Informed by
+                  <select id="goal3Source">
+                    <option>SWOT + Whitespace</option>
+                    <option>SWOT</option>
+                    <option>Whitespace</option>
+                    <option selected>Industry Lens</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="goal-input">
+              <h4>Goal 4</h4>
+              <label>
+                Objective
+                <input id="goal4Objective" type="text" value="" placeholder="Optional objective" />
+              </label>
+              <div class="form-grid compact-three" style="margin-top: 8px;">
+                <label>
+                  Owner
+                  <input id="goal4Owner" type="text" value="" placeholder="Goal owner" />
+                </label>
+                <label>
+                  Target metric
+                  <input id="goal4Target" type="text" value="" placeholder="Target metric" />
+                </label>
+                <label>
+                  Deadline
+                  <input id="goal4Deadline" type="date" value="" />
+                </label>
+                <label>
+                  Informed by
+                  <select id="goal4Source">
+                    <option selected>SWOT + Whitespace</option>
+                    <option>SWOT</option>
+                    <option>Whitespace</option>
+                    <option>Industry Lens</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <div class="goal-input">
+              <h4>Goal 5</h4>
+              <label>
+                Objective
+                <input id="goal5Objective" type="text" value="" placeholder="Optional objective" />
+              </label>
+              <div class="form-grid compact-three" style="margin-top: 8px;">
+                <label>
+                  Owner
+                  <input id="goal5Owner" type="text" value="" placeholder="Goal owner" />
+                </label>
+                <label>
+                  Target metric
+                  <input id="goal5Target" type="text" value="" placeholder="Target metric" />
+                </label>
+                <label>
+                  Deadline
+                  <input id="goal5Deadline" type="date" value="" />
+                </label>
+                <label>
+                  Informed by
+                  <select id="goal5Source">
+                    <option selected>SWOT + Whitespace</option>
+                    <option>SWOT</option>
+                    <option>Whitespace</option>
+                    <option>Industry Lens</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </section>
+        </form>
+      </aside>
+
+      <section class="summary-panel" id="executiveSummary" aria-label="Executive summary output section">
+        <section class="card overview-grid">
+          <article class="owner-card">
+            <h2>1. Account Executive and Ownership</h2>
+            <dl class="key-value">
+              <div>
+                <dt>Account Executive</dt>
+                <dd id="outAeName">-</dd>
+              </div>
+              <div>
+                <dt>Ownership Type</dt>
+                <dd id="outOwnershipType">-</dd>
+              </div>
+              <div>
+                <dt>Role and Region</dt>
+                <dd id="outRoleRegion">-</dd>
+              </div>
+              <div>
+                <dt>Direct Manager</dt>
+                <dd id="outDirectManager">-</dd>
+              </div>
+              <div>
+                <dt>Matrixed Reporting</dt>
+                <dd id="outMatrixReporting">-</dd>
+              </div>
+            </dl>
+          </article>
+
+          <article class="metrics-card">
+            <h2>2. Account and Revenue Metrics</h2>
+            <div class="kpi-grid">
+              <div class="kpi-item">
+                <p>Current ARR</p>
+                <strong id="outArrTotal">$0</strong>
+              </div>
+              <div class="kpi-item">
+                <p>Employees</p>
+                <strong id="outEmployees">0</strong>
+              </div>
+              <div class="kpi-item">
+                <p>Customer Revenue</p>
+                <strong id="outCustomerRevenue">$0</strong>
+              </div>
+              <div class="kpi-item">
+                <p>Procurement Structure</p>
+                <strong id="outProcurement">-</strong>
+              </div>
+              <div class="kpi-item">
+                <p>Revenue Split</p>
+                <strong id="outRevenueSplit">-</strong>
+              </div>
+              <div class="kpi-item">
+                <p>Top Revenue Region</p>
+                <strong id="outTopRegion">-</strong>
+              </div>
+            </div>
+            <div class="split-card">
+              <div class="split-labels">
+                <span>Direct <strong id="outDirectPercent">0%</strong></span>
+                <span>Indirect <strong id="outIndirectPercent">0%</strong></span>
+              </div>
+              <div class="split-bar" role="img" aria-label="Direct versus indirect revenue split">
+                <span class="direct" id="directBar"></span>
+                <span class="indirect" id="indirectBar"></span>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <section class="card two-column">
+          <article>
+            <h3>ARR by business pillar</h3>
+            <div id="pillarBars" class="bar-group"></div>
+          </article>
+          <article>
+            <h3>Global revenue breakdown</h3>
+            <div id="regionBars" class="bar-group"></div>
+            <p class="caption" id="outTopCountries">Priority countries: -</p>
+          </article>
+        </section>
+
+        <section class="card two-column">
+          <article>
+            <h2>3. Industry Lens</h2>
+            <ul id="industryTrendList" class="bullet-list"></ul>
+            <h3 style="margin-top: 12px;">Analyst and benchmark data</h3>
+            <ul id="analystList" class="bullet-list"></ul>
+          </article>
+          <article>
+            <div class="trend-panel">
+              <h3>Trend signal snapshot</h3>
+              <div class="trend-chart">
+                <div class="trend-col">
+                  <div class="trend-track">
+                    <div id="trendMarketBar" class="trend-fill"></div>
+                  </div>
+                  <span>Market Growth</span>
+                  <strong id="trendMarketValue">0%</strong>
+                </div>
+                <div class="trend-col">
+                  <div class="trend-track">
+                    <div id="trendDigitalBar" class="trend-fill"></div>
+                  </div>
+                  <span>Digital Spend</span>
+                  <strong id="trendDigitalValue">0%</strong>
+                </div>
+                <div class="trend-col">
+                  <div class="trend-track">
+                    <div id="trendRegulatoryBar" class="trend-fill"></div>
+                  </div>
+                  <span>Regulatory Intensity</span>
+                  <strong id="trendRegulatoryValue">0/10</strong>
+                </div>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <details class="card account-lens" id="accountLensCard" open>
+          <summary>
+            <div>
+              <h2 style="margin: 0;">4. Account Lens</h2>
+              <p class="summary-note">Strategic initiatives and pertinent account intelligence with progressive disclosure.</p>
+            </div>
+            <span class="details-hint">Expand / collapse details</span>
+          </summary>
+          <div class="two-column">
+            <article>
+              <h3>Strategic initiatives</h3>
+              <ul id="initiativeList" class="bullet-list"></ul>
+            </article>
+            <article>
+              <h3>Pertinent account information</h3>
+              <ul id="accountInfoList" class="bullet-list"></ul>
+            </article>
           </div>
-          <div class="kv-row">
-            <span class="kv-label">Payment method</span>
-            <span class="kv-value">Invoice - Net 45</span>
+        </details>
+
+        <section class="card two-column">
+          <article>
+            <h2>5. Product Whitespace Analysis</h2>
+            <div class="donut-wrap">
+              <div class="donut" id="whitespaceDonut" role="img" aria-label="Product adoption versus whitespace">
+                <span id="adoptionPercent">0%</span>
+              </div>
+              <div>
+                <p class="donut-label"><strong id="outOwnedCount">0</strong> products owned</p>
+                <p class="donut-label"><strong id="outWhitespaceCount">0</strong> whitespace products</p>
+              </div>
+            </div>
+            <div id="productPills" class="pill-grid"></div>
+          </article>
+          <article>
+            <h3>Upsell and cross-sell opportunities</h3>
+            <ul id="opportunityList" class="bullet-list"></ul>
+            <p class="caption" id="whitespaceNotesOut"></p>
+          </article>
+        </section>
+
+        <section class="card">
+          <h2 style="margin: 0;">6. SWOT Analysis</h2>
+          <div class="swot-grid">
+            <article class="swot swot-strength">
+              <h3>Strengths</h3>
+              <ul id="strengthList" class="bullet-list compact"></ul>
+            </article>
+            <article class="swot swot-weakness">
+              <h3>Weaknesses</h3>
+              <ul id="weaknessList" class="bullet-list compact"></ul>
+            </article>
+            <article class="swot swot-opportunity">
+              <h3>Opportunities</h3>
+              <ul id="swotOpportunityList" class="bullet-list compact"></ul>
+            </article>
+            <article class="swot swot-threat">
+              <h3>Threats</h3>
+              <ul id="threatList" class="bullet-list compact"></ul>
+            </article>
           </div>
-          <div class="kv-row">
-            <span class="kv-label">Last invoice</span>
-            <span class="kv-value">INV-2026-0017 ($7,000)</span>
-          </div>
-          <div class="kv-row">
-            <span class="kv-label">Next invoice date</span>
-            <span class="kv-value">Mar 01, 2026</span>
-          </div>
-          <div class="kv-row">
-            <span class="kv-label">Contract ID</span>
-            <span class="kv-value">ENT-NFG-2025-08</span>
-          </div>
-        </div>
+        </section>
+
+        <section class="card">
+          <h2 style="margin: 0;">7. Strategic Objectives (SMART)</h2>
+          <div id="goalCards" class="goal-grid"></div>
+        </section>
+
+        <section class="card summary-footer">
+          <h2>8. Input and Output Presentation View</h2>
+          <p>
+            This single-screen executive summary is structured top-down for fast scanning. Use presentation mode to hide
+            inputs, or export as PDF for executive and board meeting packs.
+          </p>
+          <p class="timestamp">Last updated: <strong id="lastUpdated">-</strong></p>
+        </section>
       </section>
     </div>
-
-    <section class="card" aria-label="Usage metrics">
-      <h2 class="section-title">Current usage</h2>
-      <div class="usage-grid">
-        <article class="meter" data-used="164" data-total="200">
-          <h4>Seats in use</h4>
-          <p>164 of 200 seats assigned</p>
-          <div class="track" role="img" aria-label="82 percent seats used">
-            <div class="fill"></div>
-          </div>
-        </article>
-        <article class="meter" data-used="18.2" data-total="25">
-          <h4>Storage usage</h4>
-          <p>18.2 TB of 25 TB consumed</p>
-          <div class="track" role="img" aria-label="73 percent storage used">
-            <div class="fill warning"></div>
-          </div>
-        </article>
-        <article class="meter" data-used="8600000" data-total="10000000">
-          <h4>API requests</h4>
-          <p>8.6M of 10M requests this month</p>
-          <div class="track" role="img" aria-label="86 percent api requests used">
-            <div class="fill danger"></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="card table-wrap" aria-label="Department allocation">
-      <h2 class="section-title">Seat allocation by department</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Department</th>
-            <th>Allocated seats</th>
-            <th>Used seats</th>
-            <th>Manager</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Engineering</td>
-            <td>90</td>
-            <td>82</td>
-            <td>Arjun Patel</td>
-            <td><span class="tag active">Healthy</span></td>
-          </tr>
-          <tr>
-            <td>Operations</td>
-            <td>45</td>
-            <td>41</td>
-            <td>Rosa Alvarez</td>
-            <td><span class="tag pending">Near limit</span></td>
-          </tr>
-          <tr>
-            <td>Data & Analytics</td>
-            <td>35</td>
-            <td>29</td>
-            <td>Jonas Meyer</td>
-            <td><span class="tag active">Healthy</span></td>
-          </tr>
-          <tr>
-            <td>Security</td>
-            <td>30</td>
-            <td>12</td>
-            <td>Natalia Baez</td>
-            <td><span class="tag active">Healthy</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </main>
+  </div>
 
   <script>
-    (function renderMeters() {
-      var meters = document.querySelectorAll(".meter");
-      meters.forEach(function (meter) {
-        var used = Number(meter.getAttribute("data-used"));
-        var total = Number(meter.getAttribute("data-total"));
-        var fill = meter.querySelector(".fill");
-        if (!fill || !total) return;
-        var percent = Math.max(0, Math.min(100, (used / total) * 100));
-        fill.style.width = percent + "%";
+    (function () {
+      var form = document.getElementById("planningForm");
+      var presentationToggle = document.getElementById("presentationToggle");
+      var exportPdf = document.getElementById("exportPdf");
+      var productChecks = Array.prototype.slice.call(document.querySelectorAll("[data-product]"));
+
+      var usdFormatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
       });
+      var integerFormatter = new Intl.NumberFormat("en-US");
+
+      function byId(id) {
+        return document.getElementById(id);
+      }
+
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+      }
+
+      function parseValue(value) {
+        var parsed = Number(value);
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+
+      function formatMoneyShort(value) {
+        var absolute = Math.abs(value);
+        if (absolute >= 1000000000) {
+          return "$" + (value / 1000000000).toFixed(1) + "B";
+        }
+        if (absolute >= 1000000) {
+          return "$" + (value / 1000000).toFixed(1) + "M";
+        }
+        if (absolute >= 1000) {
+          return "$" + (value / 1000).toFixed(1) + "K";
+        }
+        return usdFormatter.format(value);
+      }
+
+      function readLines(id) {
+        return byId(id)
+          .value.split("\n")
+          .map(function (line) {
+            return line.trim();
+          })
+          .filter(Boolean);
+      }
+
+      function setText(id, value) {
+        byId(id).textContent = value;
+      }
+
+      function renderBulletList(targetId, items, fallbackText, limit) {
+        var list = byId(targetId);
+        list.innerHTML = "";
+
+        var rows = items.slice(0, limit || 5);
+        if (!rows.length) {
+          rows = [fallbackText];
+        }
+
+        rows.forEach(function (item, index) {
+          var li = document.createElement("li");
+          li.textContent = item;
+          if (!items.length && index === 0) {
+            li.className = "muted-item";
+          }
+          list.appendChild(li);
+        });
+      }
+
+      function renderBarGroup(containerId, items, total) {
+        var container = byId(containerId);
+        container.innerHTML = "";
+
+        var fallbackTotal = total > 0
+          ? total
+          : items.reduce(function (sum, item) {
+              return sum + item.value;
+            }, 0);
+
+        if (!fallbackTotal) {
+          fallbackTotal = 1;
+        }
+
+        items.forEach(function (item, index) {
+          var row = document.createElement("div");
+          row.className = "bar-row";
+
+          var meta = document.createElement("div");
+          meta.className = "bar-meta";
+
+          var left = document.createElement("span");
+          left.textContent = item.label;
+          var right = document.createElement("span");
+          right.textContent = formatMoneyShort(item.value);
+
+          meta.appendChild(left);
+          meta.appendChild(right);
+
+          var track = document.createElement("div");
+          track.className = "bar-track";
+          var fill = document.createElement("span");
+          fill.className = "bar-fill tone-" + ((index % 4) + 1);
+          fill.style.width = clamp((item.value / fallbackTotal) * 100, 0, 100).toFixed(1) + "%";
+
+          track.appendChild(fill);
+          row.appendChild(meta);
+          row.appendChild(track);
+          container.appendChild(row);
+        });
+      }
+
+      function humanOwnership(value) {
+        if (value === "local") return "Local Owner";
+        if (value === "global") return "Global Owner";
+        return value || "-";
+      }
+
+      function updateProcurementInputState() {
+        var hasCpo = byId("cpoPresent").checked;
+        var reportsLabel = byId("procurementReportsToLabel");
+        var reportsSelect = byId("procurementReportsTo");
+        reportsSelect.disabled = hasCpo;
+        reportsLabel.classList.toggle("is-disabled", hasCpo);
+      }
+
+      function formatDate(dateValue) {
+        if (!dateValue) return "TBD";
+        var parsed = new Date(dateValue + "T00:00:00");
+        if (Number.isNaN(parsed.getTime())) return "TBD";
+        return parsed.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        });
+      }
+
+      function renderGoals() {
+        var goals = [];
+        for (var i = 1; i <= 5; i += 1) {
+          var objective = byId("goal" + i + "Objective").value.trim();
+          if (!objective) continue;
+
+          goals.push({
+            objective: objective,
+            owner: byId("goal" + i + "Owner").value.trim() || "Unassigned",
+            target: byId("goal" + i + "Target").value.trim() || "Target pending",
+            deadline: formatDate(byId("goal" + i + "Deadline").value),
+            source: byId("goal" + i + "Source").value || "SWOT + Whitespace"
+          });
+        }
+
+        var goalContainer = byId("goalCards");
+        goalContainer.innerHTML = "";
+
+        if (!goals.length) {
+          var empty = document.createElement("article");
+          empty.className = "goal-card";
+          var emptyTitle = document.createElement("h3");
+          emptyTitle.textContent = "No SMART goals added yet";
+          var emptyText = document.createElement("p");
+          emptyText.className = "goal-objective";
+          emptyText.textContent = "Add up to five SMART goals from the input panel.";
+          empty.appendChild(emptyTitle);
+          empty.appendChild(emptyText);
+          goalContainer.appendChild(empty);
+          return;
+        }
+
+        goals.forEach(function (goal, index) {
+          var card = document.createElement("article");
+          card.className = "goal-card";
+
+          var title = document.createElement("h3");
+          title.textContent = "Goal " + (index + 1);
+
+          var objective = document.createElement("p");
+          objective.className = "goal-objective";
+          objective.textContent = goal.objective;
+
+          var meta = document.createElement("dl");
+          meta.className = "goal-meta";
+
+          [
+            { label: "Owner", value: goal.owner },
+            { label: "Target", value: goal.target },
+            { label: "Deadline", value: goal.deadline },
+            { label: "Informed by", value: goal.source }
+          ].forEach(function (row) {
+            var line = document.createElement("div");
+            var label = document.createElement("span");
+            label.textContent = row.label;
+            var value = document.createElement("strong");
+            value.textContent = row.value;
+            line.appendChild(label);
+            line.appendChild(value);
+            meta.appendChild(line);
+          });
+
+          card.appendChild(title);
+          card.appendChild(objective);
+          card.appendChild(meta);
+          goalContainer.appendChild(card);
+        });
+      }
+
+      function renderTrendBar(barId, valueId, rawValue, maxValue, suffix) {
+        var value = clamp(rawValue, 0, maxValue);
+        var percent = maxValue ? (value / maxValue) * 100 : 0;
+        byId(barId).style.height = percent.toFixed(1) + "%";
+        setText(valueId, value.toFixed(1) + suffix);
+      }
+
+      function renderProductWhitespace() {
+        var products = productChecks.map(function (check) {
+          return { name: check.getAttribute("data-product"), owned: check.checked };
+        });
+
+        var owned = products.filter(function (product) {
+          return product.owned;
+        });
+        var whitespace = products.filter(function (product) {
+          return !product.owned;
+        });
+
+        var adoptionPercent = Math.round((owned.length / Math.max(products.length, 1)) * 100);
+        var donut = byId("whitespaceDonut");
+        donut.style.background =
+          "conic-gradient(var(--accent) 0 " + adoptionPercent + "%, #f7c79f " + adoptionPercent + "% 100%)";
+
+        setText("adoptionPercent", adoptionPercent + "%");
+        setText("outOwnedCount", String(owned.length));
+        setText("outWhitespaceCount", String(whitespace.length));
+
+        var pills = byId("productPills");
+        pills.innerHTML = "";
+        products.forEach(function (product) {
+          var pill = document.createElement("span");
+          pill.className = "pill " + (product.owned ? "owned" : "whitespace");
+          pill.textContent = product.name + (product.owned ? " - owned" : " - whitespace");
+          pills.appendChild(pill);
+        });
+
+        var generatedOpportunities = whitespace.slice(0, 5).map(function (product) {
+          return "Launch a targeted " + product.name + " expansion motion with a joint executive sponsor.";
+        });
+        renderBulletList(
+          "opportunityList",
+          generatedOpportunities,
+          "Portfolio coverage is complete. Focus on deeper adoption and value realization.",
+          5
+        );
+
+        var notes = byId("whitespaceNotes").value.trim();
+        setText(
+          "whitespaceNotesOut",
+          notes ? "Whitespace note: " + notes : "Add whitespace notes to frame executive-level opportunity narrative."
+        );
+      }
+
+      function renderSummary() {
+        updateProcurementInputState();
+
+        var customerName = byId("customerName").value.trim() || "Major Customer";
+        var aeName = byId("aeName").value.trim() || "Unassigned";
+        var ownershipType = humanOwnership(byId("ownershipType").value);
+        var roleRegion = byId("roleRegion").value.trim() || "Not specified";
+        var directManager = byId("directManager").value.trim() || "Not specified";
+        var matrixReporting = byId("matrixReporting").value.trim() || "None";
+
+        setText("outHeaderCustomer", customerName);
+        setText("outAeName", aeName);
+        setText("outOwnershipType", ownershipType);
+        setText("outRoleRegion", roleRegion);
+        setText("outDirectManager", directManager);
+        setText("outMatrixReporting", matrixReporting);
+
+        var arrPillars = [
+          { label: "Platform", value: parseValue(byId("arrPillarPlatform").value) },
+          { label: "Security", value: parseValue(byId("arrPillarSecurity").value) },
+          { label: "Data and AI", value: parseValue(byId("arrPillarData").value) },
+          { label: "Services", value: parseValue(byId("arrPillarServices").value) }
+        ];
+        var pillarTotal = arrPillars.reduce(function (sum, pillar) {
+          return sum + pillar.value;
+        }, 0);
+        var arrTotalInput = parseValue(byId("arrTotal").value);
+        var arrTotal = arrTotalInput > 0 ? arrTotalInput : pillarTotal;
+
+        var regionData = [
+          { label: "Americas", value: parseValue(byId("revAmer").value) },
+          { label: "EMEA", value: parseValue(byId("revEmea").value) },
+          { label: "APAC", value: parseValue(byId("revApac").value) },
+          { label: "LATAM", value: parseValue(byId("revLatam").value) }
+        ];
+        var regionTotal = regionData.reduce(function (sum, region) {
+          return sum + region.value;
+        }, 0);
+        var sortedRegions = regionData.slice().sort(function (a, b) {
+          return b.value - a.value;
+        });
+        var topRegion = sortedRegions[0] && sortedRegions[0].value > 0 ? sortedRegions[0].label : "Not available";
+
+        var employees = parseValue(byId("employees").value);
+        var customerRevenue = parseValue(byId("customerTotalRevenue").value);
+        var directPercent = clamp(parseValue(byId("directSplit").value), 0, 100);
+        var indirectPercent = 100 - directPercent;
+
+        var hasCpo = byId("cpoPresent").checked;
+        var procurementReportsTo = byId("procurementReportsTo").value;
+        var procurementNotes = byId("procurementNotes").value.trim();
+        var procurementSummary = hasCpo
+          ? "CPO in seat (centralized procurement)"
+          : "No CPO - reports to " + procurementReportsTo;
+        if (procurementNotes) {
+          procurementSummary += ". " + procurementNotes;
+        }
+
+        setText("outArrTotal", formatMoneyShort(arrTotal));
+        setText("outEmployees", integerFormatter.format(employees));
+        setText("outCustomerRevenue", formatMoneyShort(customerRevenue));
+        setText("outRevenueSplit", directPercent.toFixed(0) + "% direct / " + indirectPercent.toFixed(0) + "% indirect");
+        setText("outProcurement", procurementSummary);
+        setText("outTopRegion", topRegion);
+        setText("outTopCountries", "Priority countries: " + (byId("topCountries").value.trim() || "Not provided"));
+
+        setText("directSplitLive", directPercent.toFixed(0) + "%");
+        setText("outDirectPercent", directPercent.toFixed(0) + "%");
+        setText("outIndirectPercent", indirectPercent.toFixed(0) + "%");
+        byId("directBar").style.width = directPercent.toFixed(1) + "%";
+        byId("indirectBar").style.width = indirectPercent.toFixed(1) + "%";
+
+        renderBarGroup("pillarBars", arrPillars, arrTotal);
+        renderBarGroup("regionBars", regionData, regionTotal);
+
+        renderBulletList(
+          "industryTrendList",
+          readLines("industryTrends"),
+          "Add key industry trends to frame opportunities and threats.",
+          6
+        );
+        renderBulletList(
+          "analystList",
+          readLines("analystBenchmarks"),
+          "Add analyst and benchmark references.",
+          6
+        );
+
+        renderTrendBar(
+          "trendMarketBar",
+          "trendMarketValue",
+          parseValue(byId("marketGrowth").value),
+          20,
+          "%"
+        );
+        renderTrendBar(
+          "trendDigitalBar",
+          "trendDigitalValue",
+          parseValue(byId("digitalGrowth").value),
+          30,
+          "%"
+        );
+        renderTrendBar(
+          "trendRegulatoryBar",
+          "trendRegulatoryValue",
+          parseValue(byId("regulatoryPressure").value),
+          10,
+          "/10"
+        );
+
+        renderBulletList(
+          "initiativeList",
+          readLines("strategicInitiatives"),
+          "Add strategic initiatives from investor, analyst, or customer transformation plans.",
+          7
+        );
+        renderBulletList(
+          "accountInfoList",
+          readLines("accountNotes"),
+          "Add pertinent account updates (leadership, M&A, financial signals, major events).",
+          7
+        );
+
+        renderProductWhitespace();
+
+        renderBulletList(
+          "strengthList",
+          readLines("swotStrengths"),
+          "Add 3 to 5 prioritized strengths.",
+          5
+        );
+        renderBulletList(
+          "weaknessList",
+          readLines("swotWeaknesses"),
+          "Add 3 to 5 prioritized weaknesses.",
+          5
+        );
+        renderBulletList(
+          "swotOpportunityList",
+          readLines("swotOpportunities"),
+          "Add 3 to 5 prioritized opportunities.",
+          5
+        );
+        renderBulletList(
+          "threatList",
+          readLines("swotThreats"),
+          "Add 3 to 5 prioritized threats.",
+          5
+        );
+
+        renderGoals();
+        setText("lastUpdated", new Date().toLocaleString());
+      }
+
+      form.addEventListener("input", renderSummary);
+      form.addEventListener("change", renderSummary);
+
+      presentationToggle.addEventListener("click", function () {
+        var enabled = document.body.classList.toggle("presentation-mode");
+        presentationToggle.setAttribute("aria-pressed", String(enabled));
+        presentationToggle.textContent = enabled ? "Exit presentation mode" : "Enter presentation mode";
+      });
+
+      exportPdf.addEventListener("click", function () {
+        window.print();
+      });
+
+      renderSummary();
     })();
   </script>
 </body>
