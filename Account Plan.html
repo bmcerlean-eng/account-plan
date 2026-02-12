@@ -434,6 +434,22 @@
       font-size: 0.9rem;
     }
 
+    .split-labels.three span {
+      flex: 1;
+    }
+
+    .split-labels.three span:nth-child(1) {
+      text-align: left;
+    }
+
+    .split-labels.three span:nth-child(2) {
+      text-align: center;
+    }
+
+    .split-labels.three span:nth-child(3) {
+      text-align: right;
+    }
+
     .split-bar {
       height: 12px;
       border-radius: 999px;
@@ -455,6 +471,18 @@
 
     .split-bar .indirect {
       background: linear-gradient(90deg, #98b2f5 0%, #7697ea 100%);
+    }
+
+    .split-bar .saas {
+      background: linear-gradient(90deg, #3b82f6 0%, #1f57d6 100%);
+    }
+
+    .split-bar .subscription {
+      background: linear-gradient(90deg, #7ca7f4 0%, #5b84df 100%);
+    }
+
+    .split-bar .maintenance {
+      background: linear-gradient(90deg, #b7c8ed 0%, #95abd9 100%);
     }
 
     .section-title {
@@ -1190,9 +1218,15 @@ Procurement and legal support for contract consolidation options.</textarea>
                 <span class="direct" id="directBar"></span>
                 <span class="indirect" id="indirectBar"></span>
               </div>
-              <div class="split-labels">
-                <span>Revenue split</span>
-                <span><strong id="outRevenueSplit">-</strong></span>
+              <div class="split-labels three">
+                <span>SaaS <strong id="outSaasPercent">0%</strong></span>
+                <span>Subscription <strong id="outSubscriptionPercent">0%</strong></span>
+                <span>Maintenance <strong id="outMaintenancePercent">0%</strong></span>
+              </div>
+              <div class="split-bar" role="img" aria-label="SaaS subscription maintenance revenue split">
+                <span class="saas" id="saasBar"></span>
+                <span class="subscription" id="subscriptionBar"></span>
+                <span class="maintenance" id="maintenanceBar"></span>
               </div>
             </div>
             <p class="caption" id="outMajorGeographies">Major geographies: -</p>
@@ -1634,6 +1668,25 @@ Procurement and legal support for contract consolidation options.</textarea>
         var customerRevenue = parseValue(byId("customerTotalRevenue").value);
         var directPercent = clamp(parseValue(byId("directSplit").value), 0, 100);
         var indirectPercent = 100 - directPercent;
+        var contracts = readContracts();
+        var typeTotals = contracts.reduce(
+          function (totals, contract) {
+            var type = String(contract.type || "").toLowerCase();
+            if (type === "saas") {
+              totals.saas += contract.arr;
+            } else if (type === "sub" || type === "subscription") {
+              totals.subscription += contract.arr;
+            } else if (type === "perp" || type === "maintenance") {
+              totals.maintenance += contract.arr;
+            }
+            return totals;
+          },
+          { saas: 0, subscription: 0, maintenance: 0 }
+        );
+        var typeTotal = typeTotals.saas + typeTotals.subscription + typeTotals.maintenance;
+        var saasPercent = typeTotal > 0 ? (typeTotals.saas / typeTotal) * 100 : 0;
+        var subscriptionPercent = typeTotal > 0 ? (typeTotals.subscription / typeTotal) * 100 : 0;
+        var maintenancePercent = typeTotal > 0 ? (typeTotals.maintenance / typeTotal) * 100 : 0;
 
         var hasCpo = byId("cpoPresent").checked;
         var procurementReportsTo = byId("procurementReportsTo").value;
@@ -1653,15 +1706,19 @@ Procurement and legal support for contract consolidation options.</textarea>
         setText("directSplitLive", directPercent.toFixed(0) + "%");
         setText("outDirectPercent", directPercent.toFixed(0) + "%");
         setText("outIndirectPercent", indirectPercent.toFixed(0) + "%");
-        setText("outRevenueSplit", directPercent.toFixed(0) + "% direct / " + indirectPercent.toFixed(0) + "% indirect");
+        setText("outSaasPercent", saasPercent.toFixed(0) + "%");
+        setText("outSubscriptionPercent", subscriptionPercent.toFixed(0) + "%");
+        setText("outMaintenancePercent", maintenancePercent.toFixed(0) + "%");
         setText("outMajorGeographies", "Major geographies: " + (byId("majorGeographies").value.trim() || "Not provided"));
         byId("directBar").style.width = directPercent.toFixed(1) + "%";
         byId("indirectBar").style.width = indirectPercent.toFixed(1) + "%";
+        byId("saasBar").style.width = saasPercent.toFixed(1) + "%";
+        byId("subscriptionBar").style.width = subscriptionPercent.toFixed(1) + "%";
+        byId("maintenanceBar").style.width = maintenancePercent.toFixed(1) + "%";
 
         renderBarGroup("pillarBars", arrPillars, arrTotal);
         renderBarGroup("regionBars", regionData, regionTotal);
 
-        var contracts = readContracts();
         renderContractsTable(contracts);
 
         renderBulletList(
