@@ -1162,6 +1162,22 @@ Procurement: cost-focused and increasingly involved in scope decisions.</textare
 Cross-sell motion for AI Document Intelligence in AP and fraud workflows.
 Geographic expansion plan for Japan and Singapore shared services centers.</textarea>
             </label>
+
+            <div class="two-column" style="margin-top: 10px;">
+              <label>
+                Existing partners (one per line)
+                <textarea id="existingPartners">Accenture
+Infosys
+AWS
+ServiceNow</textarea>
+              </label>
+              <label>
+                Partner strategy (one per line)
+                <textarea id="partnerStrategy">Co-sell AP automation expansion with SI partner in EMEA.
+Use hyperscaler sponsorship to accelerate cloud migration workstreams.
+Align partner incentives with renewals and cross-sell milestones.</textarea>
+              </label>
+            </div>
           </section>
 
           <section class="form-section">
@@ -1334,6 +1350,17 @@ Procurement and legal support for contract consolidation options.</textarea>
               <article>
                 <h3>Pipeline linked to strategy</h3>
                 <ul id="pipelineList" class="bullet-list compact"></ul>
+              </article>
+            </div>
+
+            <div class="two-column">
+              <article>
+                <h3>Existing partners</h3>
+                <ul id="existingPartnersList" class="bullet-list compact"></ul>
+              </article>
+              <article>
+                <h3>Partner strategy</h3>
+                <ul id="partnerStrategyList" class="bullet-list compact"></ul>
               </article>
             </div>
           </div>
@@ -1760,6 +1787,18 @@ Procurement and legal support for contract consolidation options.</textarea>
           "pipelineList",
           readLines("strategyPipeline"),
           "Add pipeline items explicitly linked to selected strategies.",
+          8
+        );
+        renderBulletList(
+          "existingPartnersList",
+          readLines("existingPartners"),
+          "Add existing ecosystem and strategic partners.",
+          8
+        );
+        renderBulletList(
+          "partnerStrategyList",
+          readLines("partnerStrategy"),
+          "Add partner strategy, roles, and execution focus areas.",
           8
         );
 
