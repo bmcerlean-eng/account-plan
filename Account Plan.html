@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise Account Planning UI</title>
+  <style>
+    :root {
+      --bg: #f4f7fc;
+      --surface: #ffffff;
+      --surface-soft: #f9fbff;
+      --border: #d9e3f3;
+      --text: #14213d;
+      --muted: #5d6b85;
+      --accent: #1f57d6;
+      --accent-soft: #e8f0ff;
+      --success: #1f8a4c;
+      --warning: #b7791f;
+      --danger: #c53030;
+      --whitespace: #ef7c2c;
+      --radius: 16px;
+      --shadow: 0 12px 26px rgba(18, 33, 63, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .app {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 18px 20px;
+    }
+
+    .eyebrow {
+      margin: 0 0 4px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .toolbar h1 {
+      margin: 0;
+      font-size: 1.72rem;
+      letter-spacing: -0.01em;
+    }
+
+    .subhead {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 760px;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 9px 14px;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 40px;
+    }
+
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    button.ghost {
+      background: var(--surface-soft);
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(330px, 390px) minmax(0, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .input-panel {
+      padding: 16px;
+      position: sticky;
+      top: 14px;
+      max-height: calc(100vh - 28px);
+      overflow: auto;
+    }
+
+    .input-panel h2 {
+      margin: 0;
+      font-size: 1.16rem;
+    }
+
+    .panel-copy {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .form-section {
+      margin-top: 16px;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    .form-section h3 {
+      margin: 0 0 10px;
+      font-size: 0.97rem;
+      letter-spacing: 0.01em;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+      gap: 10px;
+    }
+
+    .form-grid.compact-three {
+      grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
+    }
+
+    .stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      font-size: 0.81rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    label.is-disabled {
+      opacity: 0.55;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+      padding: 8px 10px;
+      color: var(--text);
+      font: inherit;
+      font-size: 0.88rem;
+      min-height: 38px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 78px;
+      line-height: 1.45;
+    }
+
+    input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      min-height: auto;
+      margin: 0;
+    }
+
+    input[type="range"] {
+      min-height: auto;
+      height: 6px;
+      padding: 0;
+      accent-color: var(--accent);
+    }
+
+    .range-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pill-number {
+      border-radius: 999px;
+      padding: 2px 8px;
+      border: 1px solid #bdd0fb;
+      background: #edf4ff;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 10px;
+      background: #fbfdff;
+    }
+
+    .toggle-row span {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .contracts-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .contract-input {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      background: #fcfdff;
+    }
+
+    .contract-input h4 {
+      margin: 0 0 8px;
+      font-size: 0.89rem;
+    }
+
+    .product-selector {
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fbfdff;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .product-selector legend {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 700;
+      padding: 0 6px;
+    }
+
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 8px;
+    }
+
+    .checkbox-grid label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .strategy-selector {
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fbfdff;
+    }
+
+    .strategy-selector p {
+      margin: 0 0 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .input-note {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .summary-panel {
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-panel > .card {
+      padding: 16px;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .owner-card {
+      border: 1px solid #cfe0ff;
+      background: linear-gradient(180deg, #fbfdff 0%, #f3f8ff 100%);
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .owner-card h2,
+    .metrics-card h2 {
+      margin: 0;
+      font-size: 1.02rem;
+    }
+
+    .key-value {
+      margin: 12px 0 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .key-value div {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px dashed var(--border);
+      padding-bottom: 7px;
+    }
+
+    .key-value dt {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .key-value dd {
+      margin: 0;
+      text-align: right;
+      font-size: 0.88rem;
+      font-weight: 700;
+      max-width: 58%;
+    }
+
+    .metrics-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--surface-soft);
+      display: grid;
+      gap: 12px;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 8px;
+    }
+
+    .kpi-item {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px;
+      background: #fff;
+    }
+
+    .kpi-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .kpi-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .kpi-item.procurement-wide {
+      grid-column: 1 / -1;
+    }
+
+    .split-card {
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: #fff;
+      padding: 9px 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .split-labels {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.83rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .split-labels strong {
+      color: var(--text);
+      margin-left: 6px;
+      font-size: 0.9rem;
+    }
+
+    .split-labels.three span {
+      flex: 1;
+    }
+
+    .split-labels.three span:nth-child(1) {
+      text-align: left;
+    }
+
+    .split-labels.three span:nth-child(2) {
+      text-align: center;
+    }
+
+    .split-labels.three span:nth-child(3) {
+      text-align: right;
+    }
+
+    .split-bar {
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+      background: #ecf0f9;
+    }
+
+    .split-bar span {
+      height: 100%;
+      display: block;
+      transition: width 250ms ease;
+    }
+
+    .split-bar .direct {
+      background: linear-gradient(90deg, #4574ef 0%, #1f57d6 100%);
+    }
+
+    .split-bar .indirect {
+      background: linear-gradient(90deg, #98b2f5 0%, #7697ea 100%);
+    }
+
+    .split-bar .saas {
+      background: linear-gradient(90deg, #3b82f6 0%, #1f57d6 100%);
+    }
+
+    .split-bar .subscription {
+      background: linear-gradient(90deg, #7ca7f4 0%, #5b84df 100%);
+    }
+
+    .split-bar .maintenance {
+      background: linear-gradient(90deg, #b7c8ed 0%, #95abd9 100%);
+    }
+
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+    }
+
+    .section-subnote {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .two-column {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .two-column h3 {
+      margin: 0 0 8px;
+      font-size: 0.95rem;
+    }
+
+    .bar-group {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .bar-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .bar-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .bar-track {
+      height: 9px;
+      border-radius: 999px;
+      background: #e7edf9;
+      border: 1px solid #d6e1f6;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      min-width: 2px;
+    }
+
+    .bar-fill.tone-1 {
+      background: linear-gradient(90deg, #4f7ef8 0%, #1f57d6 100%);
+    }
+
+    .bar-fill.tone-2 {
+      background: linear-gradient(90deg, #6e9cfb 0%, #3f70e8 100%);
+    }
+
+    .bar-fill.tone-3 {
+      background: linear-gradient(90deg, #8cb2ff 0%, #5a86ea 100%);
+    }
+
+    .bar-fill.tone-4 {
+      background: linear-gradient(90deg, #b3cbff 0%, #86a7ef 100%);
+    }
+
+    .caption {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.86rem;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 7px;
+      font-size: 0.9rem;
+    }
+
+    .bullet-list.compact {
+      gap: 5px;
+      font-size: 0.85rem;
+    }
+
+    .muted-item {
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 8px 0 12px;
+      flex-wrap: wrap;
+    }
+
+    .donut {
+      width: 136px;
+      height: 136px;
+      border-radius: 50%;
+      background: conic-gradient(var(--accent) 0 50%, #f7c79f 50% 100%);
+      display: grid;
+      place-items: center;
+      position: relative;
+      border: 1px solid var(--border);
+    }
+
+    .donut::after {
+      content: "";
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid var(--border);
+      position: absolute;
+    }
+
+    .donut span {
+      position: relative;
+      z-index: 2;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .donut-label {
+      margin: 4px 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .donut-label strong {
+      color: var(--text);
+      margin-right: 6px;
+    }
+
+    .pill-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .pill.owned {
+      background: #eaf8f0;
+      border-color: #bde6ce;
+      color: var(--success);
+    }
+
+    .pill.whitespace {
+      background: #fff1e5;
+      border-color: #f6c89f;
+      color: #ba5a18;
+    }
+
+    details.account-lens {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    details.account-lens summary {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      user-select: none;
+    }
+
+    details.account-lens summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-note {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .details-hint {
+      color: var(--muted);
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    details.account-lens > div {
+      padding: 14px 16px 16px;
+    }
+
+    .status-grid {
+      display: grid;
+      gap: 9px;
+    }
+
+    .status-row {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px;
+      background: #fcfdff;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.84rem;
+    }
+
+    .status-row span {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .status-row strong {
+      text-align: right;
+    }
+
+    .help-note {
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid #d6e2f6;
+      border-radius: 10px;
+      background: #f8fbff;
+      color: #2d3c5a;
+      font-size: 0.88rem;
+    }
+
+    .summary-footer h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .summary-footer p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .timestamp strong {
+      color: var(--text);
+    }
+
+    body.presentation-mode .workspace {
+      grid-template-columns: 1fr;
+    }
+
+    body.presentation-mode .input-panel {
+      display: none;
+    }
+
+    body.presentation-mode .toolbar {
+      position: sticky;
+      top: 8px;
+      z-index: 20;
+    }
+
+    @media (max-width: 1240px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .input-panel {
+        position: static;
+        max-height: none;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, minmax(120px, 1fr));
+      }
+
+    }
+
+    @media (max-width: 620px) {
+      .app {
+        padding: 12px;
+      }
+
+      .toolbar h1 {
+        font-size: 1.42rem;
+      }
+
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .app {
+        max-width: none;
+        padding: 0;
+      }
+
+      #presentationToggle {
+        display: none;
+      }
+
+      .input-panel {
+        display: none;
+      }
+
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        box-shadow: none;
+        border-color: #cfd8eb;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="toolbar card">
+      <div>
+        <p class="eyebrow">Enterprise Account Planning UI</p>
+        <h1 id="outHeaderCustomer">Northstar Financial Group</h1>
+        <p class="subhead">
+          Executive planning view designed for collaboration, rapid insight, and practical account decisions.
+        </p>
+      </div>
+      <div class="toolbar-actions">
+        <button type="button" id="presentationToggle" class="ghost" aria-pressed="false">Enter presentation mode</button>
+        <button type="button" id="exportPdf" class="primary">Export PDF / Print brief</button>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside class="input-panel card" aria-label="Account planning input section">
+        <h2>Input workspace</h2>
+        <p class="panel-copy">Capture what you know, call out gaps clearly, and keep the discussion focused on actions.</p>
+
+        <form id="planningForm" novalidate>
+          <section class="form-section">
+            <h3>1. Account Executive and Ownership</h3>
+            <div class="form-grid">
+              <label>
+                Customer name
+                <input id="customerName" type="text" value="Northstar Financial Group" />
+              </label>
+              <label>
+                Account executive name
+                <input id="aeName" type="text" value="Dana Morales" />
+              </label>
+              <label>
+                AE tenure as account owner
+                <input id="aeTenure" type="text" value="18 months" placeholder="e.g., 2 years, 4 months" />
+              </label>
+              <label>
+                Ownership type
+                <select id="ownershipType">
+                  <option value="local">Local Owner</option>
+                  <option value="global" selected>Global Owner</option>
+                </select>
+              </label>
+              <label>
+                Role and region
+                <input id="roleRegion" type="text" value="Global Strategic AE, EMEA + Americas" />
+              </label>
+              <label>
+                Direct manager
+                <input id="directManager" type="text" value="VP Enterprise Sales - Priya Raman" />
+              </label>
+            </div>
+
+            <div class="form-grid" style="margin-top: 10px;">
+              <div class="toggle-row">
+                <span>Customer Success Manager assigned?</span>
+                <input id="hasCsm" type="checkbox" checked />
+              </div>
+              <label id="csmNameLabel">
+                Customer Success Manager name
+                <input id="csmName" type="text" value="Martin Lee" />
+              </label>
+              <label>
+                Highest Tungsten exec alignment
+                <input id="highestExecAlignment" type="text" value="Chief Revenue Officer" />
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h3>2. Account and Revenue Metrics</h3>
+            <div class="form-grid">
+              <label>
+                Annual Recurring Revenue (USD)
+                <input id="arrTotal" type="number" min="0" step="1000000" value="84000000" />
+              </label>
+              <label>
+                Employees at customer
+                <input id="employees" type="number" min="0" step="100" value="18500" />
+              </label>
+              <label>
+                Customer total revenue (USD)
+                <input id="customerTotalRevenue" type="number" min="0" step="10000000" value="4600000000" />
+              </label>
+              <label>
+                Major geographies we are serving
+                <input id="majorGeographies" type="text" value="US, Germany, UK, Japan, Brazil" />
+              </label>
+            </div>
+
+            <div class="form-grid" style="margin-top: 10px;">
+              <label>
+                ARR pillar: Document Workflow Automation
+                <input id="arrPillarDocumentWorkflow" type="number" min="0" step="500000" value="28000000" />
+              </label>
+              <label>
+                ARR pillar: AP &amp; AR Automation
+                <input id="arrPillarApAr" type="number" min="0" step="500000" value="22000000" />
+              </label>
+              <label>
+                ARR pillar: Print &amp; Workplace Automation
+                <input id="arrPillarPrintWorkplace" type="number" min="0" step="500000" value="18000000" />
+              </label>
+              <label>
+                ARR pillar: PDF &amp; eSignature
+                <input id="arrPillarPdfEsignature" type="number" min="0" step="500000" value="16000000" />
+              </label>
+            </div>
+
+            <div class="form-grid" style="margin-top: 10px;">
+              <label>
+                Global revenue: Americas (USD)
+                <input id="revAmer" type="number" min="0" step="500000" value="39000000" />
+              </label>
+              <label>
+                Global revenue: EMEA (USD)
+                <input id="revEmea" type="number" min="0" step="500000" value="23000000" />
+              </label>
+              <label>
+                Global revenue: APAC (USD)
+                <input id="revApac" type="number" min="0" step="500000" value="16000000" />
+              </label>
+              <label>
+                Global revenue: LATAM (USD)
+                <input id="revLatam" type="number" min="0" step="500000" value="6000000" />
+              </label>
+            </div>
+
+            <div class="form-grid" style="margin-top: 10px;">
+              <label>
+                <span class="range-label">
+                  Direct revenue split
+                  <span class="pill-number" id="directSplitLive">62%</span>
+                </span>
+                <input id="directSplit" type="range" min="0" max="100" step="1" value="62" />
+              </label>
+            </div>
+
+            <div class="stack" style="margin-top: 10px;">
+              <div class="toggle-row">
+                <span>CPO present?</span>
+                <input id="cpoPresent" type="checkbox" checked />
+              </div>
+              <label id="procurementReportsToLabel">
+                If no CPO, procurement reports to
+                <select id="procurementReportsTo">
+                  <option value="CFO">CFO</option>
+                  <option value="COO">COO</option>
+                  <option value="CIO">CIO</option>
+                  <option value="Chief Legal Officer">Chief Legal Officer</option>
+                  <option value="Shared Services">Shared Services</option>
+                </select>
+              </label>
+              <label>
+                Procurement structure notes
+                <textarea id="procurementNotes">Centralized sourcing model with regional buying teams in EMEA and APAC.</textarea>
+              </label>
+            </div>
+
+            <h3 style="margin-top: 14px;">ARR spread over major contracts</h3>
+            <div class="contracts-grid">
+              <div class="contract-input">
+                <h4>Contract 1</h4>
+                <div class="form-grid compact-three">
+                  <label>Product<input id="contract1Product" type="text" value="Document Workflow Suite" /></label>
+                  <label>ARR (USD)<input id="contract1Arr" type="number" min="0" step="100000" value="22000000" /></label>
+                  <label>Type<select id="contract1Type"><option selected>SaaS</option><option>Sub</option><option>Perp</option></select></label>
+                  <label>Term<input id="contract1Term" type="text" value="3-year" /></label>
+                  <label>Next renewal / anniversary<input id="contract1Renewal" type="date" value="2026-09-30" /></label>
+                  <label>Route<select id="contract1Route"><option selected>Direct</option><option>Indirect</option></select></label>
+                </div>
+              </div>
+
+              <div class="contract-input">
+                <h4>Contract 2</h4>
+                <div class="form-grid compact-three">
+                  <label>Product<input id="contract2Product" type="text" value="AP and AR Automation Cloud" /></label>
+                  <label>ARR (USD)<input id="contract2Arr" type="number" min="0" step="100000" value="18000000" /></label>
+                  <label>Type<select id="contract2Type"><option>SaaS</option><option selected>Sub</option><option>Perp</option></select></label>
+                  <label>Term<input id="contract2Term" type="text" value="5-year" /></label>
+                  <label>Next renewal / anniversary<input id="contract2Renewal" type="date" value="2027-03-31" /></label>
+                  <label>Route<select id="contract2Route"><option>Direct</option><option selected>Indirect</option></select></label>
+                </div>
+              </div>
+
+              <div class="contract-input">
+                <h4>Contract 3</h4>
+                <div class="form-grid compact-three">
+                  <label>Product<input id="contract3Product" type="text" value="Print and Workplace Automation" /></label>
+                  <label>ARR (USD)<input id="contract3Arr" type="number" min="0" step="100000" value="14000000" /></label>
+                  <label>Type<select id="contract3Type"><option>SaaS</option><option selected>Sub</option><option>Perp</option></select></label>
+                  <label>Term<input id="contract3Term" type="text" value="3-year" /></label>
+                  <label>Next renewal / anniversary<input id="contract3Renewal" type="date" value="2026-12-31" /></label>
+                  <label>Route<select id="contract3Route"><option selected>Direct</option><option>Indirect</option></select></label>
+                </div>
+              </div>
+
+              <div class="contract-input">
+                <h4>Contract 4</h4>
+                <div class="form-grid compact-three">
+                  <label>Product<input id="contract4Product" type="text" value="PDF and eSignature Platform" /></label>
+                  <label>ARR (USD)<input id="contract4Arr" type="number" min="0" step="100000" value="12000000" /></label>
+                  <label>Type<select id="contract4Type"><option selected>SaaS</option><option>Sub</option><option>Perp</option></select></label>
+                  <label>Term<input id="contract4Term" type="text" value="2-year" /></label>
+                  <label>Next renewal / anniversary<input id="contract4Renewal" type="date" value="2026-07-15" /></label>
+                  <label>Route<select id="contract4Route"><option selected>Direct</option><option>Indirect</option></select></label>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h3>3. Top problems we are solving for the client</h3>
+            <label>
+              Top problems (one per line)
+              <textarea id="topProblems">Reduce invoice exception handling and cycle times.
+Lower operating cost in shared services through automation.
+Improve audit readiness and compliance evidence quality.
+Increase document and signature throughput for customer onboarding.</textarea>
+            </label>
+            <p class="input-note">It is okay to have gaps here. Identify them clearly.</p>
+          </section>
+
+          <section class="form-section">
+            <h3>4. Product Whitespace Analysis</h3>
+            <fieldset class="product-selector">
+              <legend>Products currently owned</legend>
+              <div class="checkbox-grid">
+                <label><input type="checkbox" data-product="Document Workflow Suite" checked />Document Workflow Suite</label>
+                <label><input type="checkbox" data-product="AP Automation" checked />AP Automation</label>
+                <label><input type="checkbox" data-product="AR Automation" checked />AR Automation</label>
+                <label><input type="checkbox" data-product="Print Automation" checked />Print Automation</label>
+                <label><input type="checkbox" data-product="Workplace Automation" />Workplace Automation</label>
+                <label><input type="checkbox" data-product="PDF Platform" checked />PDF Platform</label>
+                <label><input type="checkbox" data-product="eSignature" checked />eSignature</label>
+                <label><input type="checkbox" data-product="AI Document Intelligence" />AI Document Intelligence</label>
+                <label><input type="checkbox" data-product="Process Mining" />Process Mining</label>
+              </div>
+            </fieldset>
+            <label style="margin-top: 10px;">
+              Whitespace opportunity notes
+              <textarea id="whitespaceNotes">Prioritize Workplace Automation and AI Document Intelligence in finance transformation and operations teams.</textarea>
+            </label>
+          </section>
+
+          <section class="form-section">
+            <h3>5. Account Lens</h3>
+            <label>
+              Strategic initiatives (one per line)
+              <textarea id="strategicInitiatives">Consolidate fragmented document operations into one global operating model.
+Expand automation in risk, fraud, and compliance workflows.
+Standardize digital channels for customer onboarding and servicing.</textarea>
+            </label>
+            <label style="margin-top: 10px;">
+              Pertinent account information (one per line)
+              <textarea id="accountNotes">New CIO joined in Q4 with mandate for platform simplification.
+Board approved multi-year transformation funding.
+Recent acquisition expanded APAC footprint and integration complexity.</textarea>
+            </label>
+
+            <div class="form-grid" style="margin-top: 10px;">
+              <label>
+                The usage of the capacity they already own is...
+                <input id="capacityUsage" type="text" value="Approximately 64% consumed across core workloads." />
+              </label>
+              <label>
+                Their level of satisfaction is...
+                <input id="satisfactionLevel" type="text" value="Moderate-to-high, with concerns on deployment speed in APAC." />
+              </label>
+              <label>
+                The major geographies we are serving are...
+                <input id="geographiesServing" type="text" value="US, UK, Germany, Japan, Singapore, Brazil" />
+              </label>
+              <label>
+                Date of our last top-to-top meeting
+                <input id="lastTopMeeting" type="date" value="2026-01-15" />
+              </label>
+            </div>
+
+            <label style="margin-top: 10px;">
+              Status of our relationships (include business sponsors, IT, InfoSec, AI Lab / COE, Procurement)
+              <textarea id="relationshipStatus">Business sponsors: strong support tied to efficiency KPIs.
+IT architecture: positive but asks for clearer integration roadmap.
+InfoSec: neutral; requires tighter third-party controls evidence.
+AI Lab / COE: emerging relationship with pilot interest.
+Procurement: cost-focused and increasingly involved in scope decisions.</textarea>
+            </label>
+
+            <div class="strategy-selector" style="margin-top: 10px;">
+              <p>Our basic strategy is (select all that apply)</p>
+              <div class="checkbox-grid">
+                <label><input type="checkbox" data-strategy="Protect the downside and focus on early renewal, contract consolidations, move-ups, utilize existing capacity" checked />Protect downside + early renewal + move-ups</label>
+                <label><input type="checkbox" data-strategy="Expand geographically" checked />Expand geographically</label>
+                <label><input type="checkbox" data-strategy="Expand new divisions" />Expand new divisions</label>
+                <label><input type="checkbox" data-strategy="Expand new use cases in existing geographies and or divisions" checked />Expand new use cases</label>
+                <label><input type="checkbox" data-strategy="Cross sell new products" checked />Cross sell new products</label>
+                <label><input type="checkbox" data-strategy="Expand relationships to X" />Expand relationships to X</label>
+              </div>
+            </div>
+
+            <label style="margin-top: 10px;">
+              These strategies are manifested in this pipeline (linked to strategy)
+              <textarea id="strategyPipeline">Early renewal and consolidation package for Document Workflow Suite (Q3 close target).
+Cross-sell motion for AI Document Intelligence in AP and fraud workflows.
+Geographic expansion plan for Japan and Singapore shared services centers.</textarea>
+            </label>
+
+            <div class="two-column" style="margin-top: 10px;">
+              <label>
+                Existing partners (one per line)
+                <textarea id="existingPartners">Accenture
+Infosys
+AWS
+ServiceNow</textarea>
+              </label>
+              <label>
+                Partner strategy (one per line)
+                <textarea id="partnerStrategy">Co-sell AP automation expansion with SI partner in EMEA.
+Use hyperscaler sponsorship to accelerate cloud migration workstreams.
+Align partner incentives with renewals and cross-sell milestones.</textarea>
+              </label>
+            </div>
+          </section>
+
+          <section class="form-section">
+            <h3>6. Here is how we need help...</h3>
+            <label>
+              Collaboration and support needed (one per line)
+              <textarea id="helpNeeded">Executive sponsor support for top-to-top meeting preparation.
+PS architect support to strengthen integration roadmap in APAC.
+Customer Success support for adoption plan and value story.
+Procurement and legal support for contract consolidation options.</textarea>
+            </label>
+            <p class="input-note">
+              I realize we may not know many of these answers at the time we meet. Don't try to hide this, just tell it
+              like it is. Do your homework, but don't worry about making a pretty presentation. Make sure you have PS,
+              Customer Success, and whatever other resources you need in the meeting.
+            </p>
+            <p class="input-note">
+              The tone of the internal meeting is one of collaboration and brainstorming - not the AE defending their
+              position. We are one team.
+            </p>
+          </section>
+        </form>
+      </aside>
+
+      <section class="summary-panel" aria-label="Executive summary output section">
+        <section class="card overview-grid">
+          <article class="owner-card">
+            <h2>1. Account Executive and Ownership</h2>
+            <dl class="key-value">
+              <div><dt>Account Executive</dt><dd id="outAeName">-</dd></div>
+              <div><dt>AE tenure as owner</dt><dd id="outAeTenure">-</dd></div>
+              <div><dt>Ownership Type</dt><dd id="outOwnershipType">-</dd></div>
+              <div><dt>Role and Region</dt><dd id="outRoleRegion">-</dd></div>
+              <div><dt>Direct Manager</dt><dd id="outDirectManager">-</dd></div>
+              <div><dt>Customer Success Manager</dt><dd id="outCsm">-</dd></div>
+              <div><dt>Highest Tungsten exec alignment</dt><dd id="outHighestExecAlignment">-</dd></div>
+            </dl>
+          </article>
+
+          <article class="metrics-card">
+            <h2>2. Account and Revenue Metrics</h2>
+            <div class="kpi-grid">
+              <div class="kpi-item"><p>Current ARR</p><strong id="outArrTotal">$0</strong></div>
+              <div class="kpi-item"><p>Employees</p><strong id="outEmployees">0</strong></div>
+              <div class="kpi-item"><p>Customer Revenue</p><strong id="outCustomerRevenue">$0</strong></div>
+              <div class="kpi-item procurement-wide"><p>Procurement</p><strong id="outProcurement">-</strong></div>
+            </div>
+            <div class="split-card">
+              <div class="split-labels">
+                <span>Direct <strong id="outDirectPercent">0%</strong></span>
+                <span>Indirect <strong id="outIndirectPercent">0%</strong></span>
+              </div>
+              <div class="split-bar" role="img" aria-label="Direct versus indirect revenue split">
+                <span class="direct" id="directBar"></span>
+                <span class="indirect" id="indirectBar"></span>
+              </div>
+              <div class="split-labels three">
+                <span>SaaS <strong id="outSaasPercent">0%</strong></span>
+                <span>Subscription <strong id="outSubscriptionPercent">0%</strong></span>
+                <span>Maintenance <strong id="outMaintenancePercent">0%</strong></span>
+              </div>
+              <div class="split-bar" role="img" aria-label="SaaS subscription maintenance revenue split">
+                <span class="saas" id="saasBar"></span>
+                <span class="subscription" id="subscriptionBar"></span>
+                <span class="maintenance" id="maintenanceBar"></span>
+              </div>
+            </div>
+            <p class="caption" id="outMajorGeographies">Major geographies: -</p>
+          </article>
+        </section>
+
+        <section class="card two-column">
+          <article>
+            <h3>ARR by business pillar</h3>
+            <div id="pillarBars" class="bar-group"></div>
+          </article>
+          <article>
+            <h3>Global revenue breakdown</h3>
+            <div id="regionBars" class="bar-group"></div>
+          </article>
+        </section>
+
+        <section class="card">
+          <h2 class="section-title">2. ARR spread over major contracts</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>ARR</th>
+                  <th>Type</th>
+                  <th>Term</th>
+                  <th>Next renewal / anniversary</th>
+                  <th>Direct or Indirect</th>
+                </tr>
+              </thead>
+              <tbody id="contractTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2 class="section-title">3. Top problems we are solving for the client</h2>
+          <p class="section-subnote">It is okay to have gaps. Call them out directly and use them to drive next actions.</p>
+          <ul id="topProblemsList" class="bullet-list"></ul>
+        </section>
+
+        <section class="card two-column">
+          <article>
+            <h2 class="section-title">4. Product Whitespace Analysis</h2>
+            <div class="donut-wrap">
+              <div class="donut" id="whitespaceDonut" role="img" aria-label="Product adoption versus whitespace">
+                <span id="adoptionPercent">0%</span>
+              </div>
+              <div>
+                <p class="donut-label"><strong id="outOwnedCount">0</strong> products owned</p>
+                <p class="donut-label"><strong id="outWhitespaceCount">0</strong> whitespace products</p>
+              </div>
+            </div>
+            <div id="productPills" class="pill-grid"></div>
+          </article>
+          <article>
+            <h3>Upsell and cross-sell opportunities</h3>
+            <ul id="opportunityList" class="bullet-list"></ul>
+            <p class="caption" id="whitespaceNotesOut"></p>
+          </article>
+        </section>
+
+        <details class="card account-lens" open>
+          <summary>
+            <div>
+              <h2 style="margin: 0;">5. Account Lens</h2>
+              <p class="summary-note">Strategic context, relationship status, and pipeline linkage with progressive disclosure.</p>
+            </div>
+            <span class="details-hint">Expand / collapse details</span>
+          </summary>
+          <div class="stack">
+            <div class="two-column">
+              <article>
+                <h3>Strategic initiatives</h3>
+                <ul id="initiativeList" class="bullet-list"></ul>
+              </article>
+              <article>
+                <h3>Pertinent account information</h3>
+                <ul id="accountInfoList" class="bullet-list"></ul>
+              </article>
+            </div>
+
+            <div class="two-column">
+              <article>
+                <h3>Current account health context</h3>
+                <div class="status-grid">
+                  <div class="status-row"><span>Usage of owned capacity</span><strong id="outCapacityUsage">-</strong></div>
+                  <div class="status-row"><span>Level of satisfaction</span><strong id="outSatisfactionLevel">-</strong></div>
+                  <div class="status-row"><span>Major geographies served</span><strong id="outGeographiesServing">-</strong></div>
+                  <div class="status-row"><span>Last top-to-top meeting</span><strong id="outLastTopMeeting">-</strong></div>
+                </div>
+              </article>
+              <article>
+                <h3>Relationship status</h3>
+                <ul id="relationshipStatusList" class="bullet-list compact"></ul>
+              </article>
+            </div>
+
+            <div class="two-column">
+              <article>
+                <h3>Our basic strategy</h3>
+                <ul id="strategyList" class="bullet-list compact"></ul>
+              </article>
+              <article>
+                <h3>Pipeline linked to strategy</h3>
+                <ul id="pipelineList" class="bullet-list compact"></ul>
+              </article>
+            </div>
+
+            <div class="two-column">
+              <article>
+                <h3>Existing partners</h3>
+                <ul id="existingPartnersList" class="bullet-list compact"></ul>
+              </article>
+              <article>
+                <h3>Partner strategy</h3>
+                <ul id="partnerStrategyList" class="bullet-list compact"></ul>
+              </article>
+            </div>
+          </div>
+        </details>
+
+        <section class="card">
+          <h2 style="margin: 0;">6. Here is how we need help...</h2>
+          <ul id="helpList" class="bullet-list" style="margin-top: 10px;"></ul>
+          <div class="help-note">
+            I realize we may not know many of these answers at the time we meet. Don't try to hide this, just tell it like
+            it is. Do your homework, but don't worry about making a pretty presentation. Make sure you have PS, Customer
+            Success, and whatever other resources you need in the meeting.
+          </div>
+          <div class="help-note">
+            The tone of the internal meeting is one of collaboration and brainstorming - not the AE defending their
+            position. We are one team.
+          </div>
+        </section>
+
+        <section class="card summary-footer">
+          <h2>Presentation and review notes</h2>
+          <p>Use presentation mode for executive walkthroughs and export PDF for meeting prep packets.</p>
+          <p class="timestamp">Last updated: <strong id="lastUpdated">-</strong></p>
+        </section>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var form = document.getElementById("planningForm");
+      var presentationToggle = document.getElementById("presentationToggle");
+      var exportPdf = document.getElementById("exportPdf");
+      var productChecks = Array.prototype.slice.call(document.querySelectorAll("[data-product]"));
+      var strategyChecks = Array.prototype.slice.call(document.querySelectorAll("[data-strategy]"));
+
+      var usdFormatter = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+      });
+      var integerFormatter = new Intl.NumberFormat("en-US");
+
+      function byId(id) {
+        return document.getElementById(id);
+      }
+
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+      }
+
+      function parseValue(value) {
+        var parsed = Number(value);
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+
+      function formatMoneyShort(value) {
+        var absolute = Math.abs(value);
+        if (absolute >= 1000000000) return "$" + (value / 1000000000).toFixed(1) + "B";
+        if (absolute >= 1000000) return "$" + (value / 1000000).toFixed(1) + "M";
+        if (absolute >= 1000) return "$" + (value / 1000).toFixed(1) + "K";
+        return usdFormatter.format(value);
+      }
+
+      function readLines(id) {
+        return byId(id)
+          .value.split("\n")
+          .map(function (line) {
+            return line.trim();
+          })
+          .filter(Boolean);
+      }
+
+      function setText(id, value) {
+        byId(id).textContent = value;
+      }
+
+      function renderBulletList(targetId, items, fallbackText, limit) {
+        var list = byId(targetId);
+        list.innerHTML = "";
+
+        var rows = items.slice(0, limit || 6);
+        if (!rows.length) {
+          rows = [fallbackText];
+        }
+
+        rows.forEach(function (item, index) {
+          var li = document.createElement("li");
+          li.textContent = item;
+          if (!items.length && index === 0) {
+            li.className = "muted-item";
+          }
+          list.appendChild(li);
+        });
+      }
+
+      function renderBarGroup(containerId, items, total) {
+        var container = byId(containerId);
+        container.innerHTML = "";
+
+        var denominator = total > 0
+          ? total
+          : items.reduce(function (sum, item) {
+              return sum + item.value;
+            }, 0);
+        if (!denominator) {
+          denominator = 1;
+        }
+
+        items.forEach(function (item, index) {
+          var row = document.createElement("div");
+          row.className = "bar-row";
+
+          var meta = document.createElement("div");
+          meta.className = "bar-meta";
+          var left = document.createElement("span");
+          left.textContent = item.label;
+          var right = document.createElement("span");
+          right.textContent = formatMoneyShort(item.value);
+          meta.appendChild(left);
+          meta.appendChild(right);
+
+          var track = document.createElement("div");
+          track.className = "bar-track";
+          var fill = document.createElement("span");
+          fill.className = "bar-fill tone-" + ((index % 4) + 1);
+          fill.style.width = clamp((item.value / denominator) * 100, 0, 100).toFixed(1) + "%";
+          track.appendChild(fill);
+
+          row.appendChild(meta);
+          row.appendChild(track);
+          container.appendChild(row);
+        });
+      }
+
+      function humanOwnership(value) {
+        if (value === "local") return "Local Owner";
+        if (value === "global") return "Global Owner";
+        return value || "-";
+      }
+
+      function formatDate(dateValue) {
+        if (!dateValue) return "TBD";
+        var parsed = new Date(dateValue + "T00:00:00");
+        if (Number.isNaN(parsed.getTime())) return "TBD";
+        return parsed.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        });
+      }
+
+      function updateProcurementInputState() {
+        var hasCpo = byId("cpoPresent").checked;
+        var reportsLabel = byId("procurementReportsToLabel");
+        var reportsSelect = byId("procurementReportsTo");
+        reportsSelect.disabled = hasCpo;
+        reportsLabel.classList.toggle("is-disabled", hasCpo);
+      }
+
+      function updateCsmInputState() {
+        var hasCsm = byId("hasCsm").checked;
+        var csmName = byId("csmName");
+        var csmLabel = byId("csmNameLabel");
+        csmName.disabled = !hasCsm;
+        csmLabel.classList.toggle("is-disabled", !hasCsm);
+      }
+
+      function readContracts() {
+        var contracts = [];
+        for (var i = 1; i <= 4; i += 1) {
+          var product = byId("contract" + i + "Product").value.trim();
+          var arr = parseValue(byId("contract" + i + "Arr").value);
+          var type = byId("contract" + i + "Type").value;
+          var term = byId("contract" + i + "Term").value.trim();
+          var renewal = byId("contract" + i + "Renewal").value;
+          var route = byId("contract" + i + "Route").value;
+
+          if (!product && !arr && !term && !renewal) {
+            continue;
+          }
+
+          contracts.push({
+            product: product || "TBD",
+            arr: arr,
+            type: type || "TBD",
+            term: term || "TBD",
+            renewal: formatDate(renewal),
+            route: route || "TBD"
+          });
+        }
+        return contracts;
+      }
+
+      function renderContractsTable(contracts) {
+        var tbody = byId("contractTableBody");
+        tbody.innerHTML = "";
+
+        if (!contracts.length) {
+          var row = document.createElement("tr");
+          var cell = document.createElement("td");
+          cell.colSpan = 6;
+          cell.className = "muted-item";
+          cell.textContent = "No contract rows provided yet.";
+          row.appendChild(cell);
+          tbody.appendChild(row);
+          return;
+        }
+
+        contracts.forEach(function (contract) {
+          var row = document.createElement("tr");
+          [contract.product, formatMoneyShort(contract.arr), contract.type, contract.term, contract.renewal, contract.route]
+            .forEach(function (value) {
+              var cell = document.createElement("td");
+              cell.textContent = value;
+              row.appendChild(cell);
+            });
+          tbody.appendChild(row);
+        });
+      }
+
+      function renderProductWhitespace() {
+        var products = productChecks.map(function (check) {
+          return { name: check.getAttribute("data-product"), owned: check.checked };
+        });
+
+        var owned = products.filter(function (product) {
+          return product.owned;
+        });
+        var whitespace = products.filter(function (product) {
+          return !product.owned;
+        });
+
+        var adoptionPercent = Math.round((owned.length / Math.max(products.length, 1)) * 100);
+        var donut = byId("whitespaceDonut");
+        donut.style.background =
+          "conic-gradient(var(--accent) 0 " + adoptionPercent + "%, #f7c79f " + adoptionPercent + "% 100%)";
+
+        setText("adoptionPercent", adoptionPercent + "%");
+        setText("outOwnedCount", String(owned.length));
+        setText("outWhitespaceCount", String(whitespace.length));
+
+        var pills = byId("productPills");
+        pills.innerHTML = "";
+        products.forEach(function (product) {
+          var pill = document.createElement("span");
+          pill.className = "pill " + (product.owned ? "owned" : "whitespace");
+          pill.textContent = product.name + (product.owned ? " - owned" : " - whitespace");
+          pills.appendChild(pill);
+        });
+
+        var generatedOpportunities = whitespace.slice(0, 5).map(function (product) {
+          return "Launch targeted " + product.name + " expansion with an executive sponsor and measurable timeline.";
+        });
+        renderBulletList(
+          "opportunityList",
+          generatedOpportunities,
+          "Whitespace is limited. Focus on deeper adoption and measurable value realization.",
+          5
+        );
+
+        var notes = byId("whitespaceNotes").value.trim();
+        setText(
+          "whitespaceNotesOut",
+          notes ? "Whitespace note: " + notes : "Add whitespace notes to frame executive opportunities."
+        );
+      }
+
+      function renderStrategies() {
+        var selected = strategyChecks
+          .filter(function (check) {
+            return check.checked;
+          })
+          .map(function (check) {
+            return check.getAttribute("data-strategy");
+          });
+
+        renderBulletList(
+          "strategyList",
+          selected,
+          "Select at least one strategic approach for this account.",
+          8
+        );
+      }
+
+      function renderSummary() {
+        updateProcurementInputState();
+        updateCsmInputState();
+
+        var customerName = byId("customerName").value.trim() || "Major Customer";
+        var aeName = byId("aeName").value.trim() || "Unassigned";
+        var aeTenure = byId("aeTenure").value.trim() || "Not provided";
+        var ownershipType = humanOwnership(byId("ownershipType").value);
+        var roleRegion = byId("roleRegion").value.trim() || "Not specified";
+        var directManager = byId("directManager").value.trim() || "Not specified";
+        var hasCsm = byId("hasCsm").checked;
+        var csmName = hasCsm ? byId("csmName").value.trim() || "CSM assigned (name pending)" : "No CSM assigned";
+        var highestExecAlignment = byId("highestExecAlignment").value.trim() || "Not specified";
+
+        setText("outHeaderCustomer", customerName);
+        setText("outAeName", aeName);
+        setText("outAeTenure", aeTenure);
+        setText("outOwnershipType", ownershipType);
+        setText("outRoleRegion", roleRegion);
+        setText("outDirectManager", directManager);
+        setText("outCsm", csmName);
+        setText("outHighestExecAlignment", highestExecAlignment);
+
+        var arrPillars = [
+          { label: "Document Workflow Automation", value: parseValue(byId("arrPillarDocumentWorkflow").value) },
+          { label: "AP & AR Automation", value: parseValue(byId("arrPillarApAr").value) },
+          { label: "Print & Workplace Automation", value: parseValue(byId("arrPillarPrintWorkplace").value) },
+          { label: "PDF & eSignature", value: parseValue(byId("arrPillarPdfEsignature").value) }
+        ];
+        var pillarTotal = arrPillars.reduce(function (sum, pillar) {
+          return sum + pillar.value;
+        }, 0);
+        var arrTotalInput = parseValue(byId("arrTotal").value);
+        var arrTotal = arrTotalInput > 0 ? arrTotalInput : pillarTotal;
+
+        var regionData = [
+          { label: "Americas", value: parseValue(byId("revAmer").value) },
+          { label: "EMEA", value: parseValue(byId("revEmea").value) },
+          { label: "APAC", value: parseValue(byId("revApac").value) },
+          { label: "LATAM", value: parseValue(byId("revLatam").value) }
+        ];
+        var regionTotal = regionData.reduce(function (sum, region) {
+          return sum + region.value;
+        }, 0);
+
+        var employees = parseValue(byId("employees").value);
+        var customerRevenue = parseValue(byId("customerTotalRevenue").value);
+        var directPercent = clamp(parseValue(byId("directSplit").value), 0, 100);
+        var indirectPercent = 100 - directPercent;
+        var contracts = readContracts();
+        var typeTotals = contracts.reduce(
+          function (totals, contract) {
+            var type = String(contract.type || "").toLowerCase();
+            if (type === "saas") {
+              totals.saas += contract.arr;
+            } else if (type === "sub" || type === "subscription") {
+              totals.subscription += contract.arr;
+            } else if (type === "perp" || type === "maintenance") {
+              totals.maintenance += contract.arr;
+            }
+            return totals;
+          },
+          { saas: 0, subscription: 0, maintenance: 0 }
+        );
+        var typeTotal = typeTotals.saas + typeTotals.subscription + typeTotals.maintenance;
+        var saasPercent = typeTotal > 0 ? (typeTotals.saas / typeTotal) * 100 : 0;
+        var subscriptionPercent = typeTotal > 0 ? (typeTotals.subscription / typeTotal) * 100 : 0;
+        var maintenancePercent = typeTotal > 0 ? (typeTotals.maintenance / typeTotal) * 100 : 0;
+
+        var hasCpo = byId("cpoPresent").checked;
+        var procurementReportsTo = byId("procurementReportsTo").value;
+        var procurementNotes = byId("procurementNotes").value.trim();
+        var procurementSummary = hasCpo
+          ? "CPO in seat"
+          : "No CPO - reports to " + procurementReportsTo;
+        if (procurementNotes) {
+          procurementSummary += ". " + procurementNotes;
+        }
+
+        setText("outArrTotal", formatMoneyShort(arrTotal));
+        setText("outEmployees", integerFormatter.format(employees));
+        setText("outCustomerRevenue", formatMoneyShort(customerRevenue));
+        setText("outProcurement", procurementSummary);
+
+        setText("directSplitLive", directPercent.toFixed(0) + "%");
+        setText("outDirectPercent", directPercent.toFixed(0) + "%");
+        setText("outIndirectPercent", indirectPercent.toFixed(0) + "%");
+        setText("outSaasPercent", saasPercent.toFixed(0) + "%");
+        setText("outSubscriptionPercent", subscriptionPercent.toFixed(0) + "%");
+        setText("outMaintenancePercent", maintenancePercent.toFixed(0) + "%");
+        setText("outMajorGeographies", "Major geographies: " + (byId("majorGeographies").value.trim() || "Not provided"));
+        byId("directBar").style.width = directPercent.toFixed(1) + "%";
+        byId("indirectBar").style.width = indirectPercent.toFixed(1) + "%";
+        byId("saasBar").style.width = saasPercent.toFixed(1) + "%";
+        byId("subscriptionBar").style.width = subscriptionPercent.toFixed(1) + "%";
+        byId("maintenanceBar").style.width = maintenancePercent.toFixed(1) + "%";
+
+        renderBarGroup("pillarBars", arrPillars, arrTotal);
+        renderBarGroup("regionBars", regionData, regionTotal);
+
+        renderContractsTable(contracts);
+
+        renderBulletList(
+          "topProblemsList",
+          readLines("topProblems"),
+          "Add the top client problems and call out any known gaps.",
+          8
+        );
+
+        renderProductWhitespace();
+
+        renderBulletList(
+          "initiativeList",
+          readLines("strategicInitiatives"),
+          "Add strategic initiatives from investor, analyst, or transformation plans.",
+          7
+        );
+        renderBulletList(
+          "accountInfoList",
+          readLines("accountNotes"),
+          "Add pertinent account updates (leadership, M&A, financial signals, major events).",
+          7
+        );
+
+        setText("outCapacityUsage", byId("capacityUsage").value.trim() || "Not provided");
+        setText("outSatisfactionLevel", byId("satisfactionLevel").value.trim() || "Not provided");
+        setText("outGeographiesServing", byId("geographiesServing").value.trim() || "Not provided");
+        setText("outLastTopMeeting", formatDate(byId("lastTopMeeting").value));
+
+        renderBulletList(
+          "relationshipStatusList",
+          readLines("relationshipStatus"),
+          "Add relationship status details across business, IT, InfoSec, AI Lab / COE, and Procurement.",
+          8
+        );
+
+        renderStrategies();
+        renderBulletList(
+          "pipelineList",
+          readLines("strategyPipeline"),
+          "Add pipeline items explicitly linked to selected strategies.",
+          8
+        );
+        renderBulletList(
+          "existingPartnersList",
+          readLines("existingPartners"),
+          "Add existing ecosystem and strategic partners.",
+          8
+        );
+        renderBulletList(
+          "partnerStrategyList",
+          readLines("partnerStrategy"),
+          "Add partner strategy, roles, and execution focus areas.",
+          8
+        );
+
+        renderBulletList(
+          "helpList",
+          readLines("helpNeeded"),
+          "Add the specific help needed from leadership and cross-functional teams.",
+          8
+        );
+
+        setText("lastUpdated", new Date().toLocaleString());
+      }
+
+      form.addEventListener("input", renderSummary);
+      form.addEventListener("change", renderSummary);
+
+      presentationToggle.addEventListener("click", function () {
+        var enabled = document.body.classList.toggle("presentation-mode");
+        presentationToggle.setAttribute("aria-pressed", String(enabled));
+        presentationToggle.textContent = enabled ? "Exit presentation mode" : "Enter presentation mode";
+      });
+
+      exportPdf.addEventListener("click", function () {
+        window.print();
+      });
+
+      renderSummary();
+    })();
+  </script>
+</body>
+</html>
