@@ -306,19 +306,6 @@
       letter-spacing: 0.01em;
     }
 
-    .goal-input {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px;
-      background: #fcfdff;
-      margin-top: 10px;
-    }
-
-    .goal-input h4 {
-      margin: 0 0 8px;
-      font-size: 0.9rem;
-    }
-
     .input-note {
       margin: 8px 0 0;
       color: var(--muted);
@@ -728,89 +715,6 @@
       text-align: right;
     }
 
-    .swot-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .swot {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px;
-      background: #fcfdff;
-      min-height: 172px;
-    }
-
-    .swot h3 {
-      margin: 0 0 8px;
-      font-size: 0.93rem;
-    }
-
-    .swot.swot-strength {
-      border-left: 4px solid var(--success);
-    }
-
-    .swot.swot-weakness {
-      border-left: 4px solid var(--danger);
-    }
-
-    .swot.swot-opportunity {
-      border-left: 4px solid var(--accent);
-    }
-
-    .swot.swot-threat {
-      border-left: 4px solid var(--warning);
-    }
-
-    .goal-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .goal-card {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px;
-      background: #fcfdff;
-      display: grid;
-      gap: 8px;
-    }
-
-    .goal-card h3 {
-      margin: 0;
-      font-size: 0.92rem;
-    }
-
-    .goal-card .goal-objective {
-      margin: 0;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .goal-meta {
-      margin: 0;
-      display: grid;
-      gap: 5px;
-    }
-
-    .goal-meta div {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .goal-meta strong {
-      color: var(--text);
-      text-align: right;
-      font-size: 0.84rem;
-    }
-
     .help-note {
       margin-top: 12px;
       padding: 10px;
@@ -874,9 +778,6 @@
         grid-template-columns: repeat(2, minmax(120px, 1fr));
       }
 
-      .swot-grid {
-        grid-template-columns: 1fr;
-      }
     }
 
     @media (max-width: 620px) {
@@ -1240,108 +1141,7 @@ Geographic expansion plan for Japan and Singapore shared services centers.</text
           </section>
 
           <section class="form-section">
-            <h3>6. SWOT Analysis</h3>
-            <label>
-              Strengths (3-5 evidence-based points)
-              <textarea id="swotStrengths">Deep executive alignment with CIO and COO stakeholders.
-Strong platform adoption in mission-critical workflows.
-Documented value realization in cycle-time and error-rate reduction.</textarea>
-            </label>
-            <label style="margin-top: 10px;">
-              Weaknesses (3-5 evidence-based points)
-              <textarea id="swotWeaknesses">Limited penetration in APAC business units.
-Procurement cycle complexity slows expansion timing.
-Inconsistent account narrative across regional teams.</textarea>
-            </label>
-            <label style="margin-top: 10px;">
-              Opportunities (3-5 evidence-based points)
-              <textarea id="swotOpportunities">Attach AI Document Intelligence to compliance and fraud priorities.
-Expand Workplace Automation into newly acquired divisions.
-Increase direct executive cadence tied to transformation metrics.</textarea>
-            </label>
-            <label style="margin-top: 10px;">
-              Threats (3-5 evidence-based points)
-              <textarea id="swotThreats">Competitive bundling pressure from large platform vendors.
-Budget tightening if macro signals weaken.
-Regulatory changes can delay production rollout timelines.</textarea>
-            </label>
-          </section>
-
-          <section class="form-section">
-            <h3>7. Strategic Objectives</h3>
-            <div class="goal-input">
-              <h4>Goal 1</h4>
-              <label>
-                Objective
-                <input id="goal1Objective" type="text" value="Increase AI Document Intelligence ARR by $6M via fraud and AP expansion plays." />
-              </label>
-              <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>Owner<input id="goal1Owner" type="text" value="Dana Morales" /></label>
-                <label>Target metric<input id="goal1Target" type="text" value="$6M net-new ARR" /></label>
-                <label>Deadline<input id="goal1Deadline" type="date" value="2026-09-30" /></label>
-                <label>Informed by<select id="goal1Source"><option selected>SWOT + Whitespace</option><option>SWOT</option><option>Whitespace</option><option>Account Lens</option></select></label>
-              </div>
-            </div>
-
-            <div class="goal-input">
-              <h4>Goal 2</h4>
-              <label>
-                Objective
-                <input id="goal2Objective" type="text" value="Lift EMEA pipeline coverage to 3.2x through procurement alignment and renewal sequencing." />
-              </label>
-              <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>Owner<input id="goal2Owner" type="text" value="EMEA Regional Director" /></label>
-                <label>Target metric<input id="goal2Target" type="text" value="3.2x qualified pipeline" /></label>
-                <label>Deadline<input id="goal2Deadline" type="date" value="2026-08-15" /></label>
-                <label>Informed by<select id="goal2Source"><option>SWOT + Whitespace</option><option selected>SWOT</option><option>Whitespace</option><option>Account Lens</option></select></label>
-              </div>
-            </div>
-
-            <div class="goal-input">
-              <h4>Goal 3</h4>
-              <label>
-                Objective
-                <input id="goal3Objective" type="text" value="Secure 3-year executive-approved platform roadmap across Document Workflow and AP/AR Automation." />
-              </label>
-              <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>Owner<input id="goal3Owner" type="text" value="Global CIO Sponsor" /></label>
-                <label>Target metric<input id="goal3Target" type="text" value="Signed roadmap and steering cadence" /></label>
-                <label>Deadline<input id="goal3Deadline" type="date" value="2026-12-15" /></label>
-                <label>Informed by<select id="goal3Source"><option>SWOT + Whitespace</option><option>SWOT</option><option>Whitespace</option><option selected>Account Lens</option></select></label>
-              </div>
-            </div>
-
-            <div class="goal-input">
-              <h4>Goal 4</h4>
-              <label>
-                Objective
-                <input id="goal4Objective" type="text" value="" placeholder="Optional objective" />
-              </label>
-              <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>Owner<input id="goal4Owner" type="text" value="" placeholder="Goal owner" /></label>
-                <label>Target metric<input id="goal4Target" type="text" value="" placeholder="Target metric" /></label>
-                <label>Deadline<input id="goal4Deadline" type="date" value="" /></label>
-                <label>Informed by<select id="goal4Source"><option selected>SWOT + Whitespace</option><option>SWOT</option><option>Whitespace</option><option>Account Lens</option></select></label>
-              </div>
-            </div>
-
-            <div class="goal-input">
-              <h4>Goal 5</h4>
-              <label>
-                Objective
-                <input id="goal5Objective" type="text" value="" placeholder="Optional objective" />
-              </label>
-              <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>Owner<input id="goal5Owner" type="text" value="" placeholder="Goal owner" /></label>
-                <label>Target metric<input id="goal5Target" type="text" value="" placeholder="Target metric" /></label>
-                <label>Deadline<input id="goal5Deadline" type="date" value="" /></label>
-                <label>Informed by<select id="goal5Source"><option selected>SWOT + Whitespace</option><option>SWOT</option><option>Whitespace</option><option>Account Lens</option></select></label>
-              </div>
-            </div>
-          </section>
-
-          <section class="form-section">
-            <h3>8. Here is how we need help...</h3>
+            <h3>6. Here is how we need help...</h3>
             <label>
               Collaboration and support needed (one per line)
               <textarea id="helpNeeded">Executive sponsor support for top-to-top meeting preparation.
@@ -1512,34 +1312,7 @@ Procurement and legal support for contract consolidation options.</textarea>
         </details>
 
         <section class="card">
-          <h2 style="margin: 0;">6. SWOT Analysis</h2>
-          <div class="swot-grid">
-            <article class="swot swot-strength">
-              <h3>Strengths</h3>
-              <ul id="strengthList" class="bullet-list compact"></ul>
-            </article>
-            <article class="swot swot-weakness">
-              <h3>Weaknesses</h3>
-              <ul id="weaknessList" class="bullet-list compact"></ul>
-            </article>
-            <article class="swot swot-opportunity">
-              <h3>Opportunities</h3>
-              <ul id="swotOpportunityList" class="bullet-list compact"></ul>
-            </article>
-            <article class="swot swot-threat">
-              <h3>Threats</h3>
-              <ul id="threatList" class="bullet-list compact"></ul>
-            </article>
-          </div>
-        </section>
-
-        <section class="card">
-          <h2 style="margin: 0;">7. Strategic Objectives</h2>
-          <div id="goalCards" class="goal-grid"></div>
-        </section>
-
-        <section class="card">
-          <h2 style="margin: 0;">8. Here is how we need help...</h2>
+          <h2 style="margin: 0;">6. Here is how we need help...</h2>
           <ul id="helpList" class="bullet-list" style="margin-top: 10px;"></ul>
           <div class="help-note">
             I realize we may not know many of these answers at the time we meet. Don't try to hide this, just tell it like
@@ -1801,74 +1574,6 @@ Procurement and legal support for contract consolidation options.</textarea>
         );
       }
 
-      function renderGoals() {
-        var goals = [];
-        for (var i = 1; i <= 5; i += 1) {
-          var objective = byId("goal" + i + "Objective").value.trim();
-          if (!objective) continue;
-
-          goals.push({
-            objective: objective,
-            owner: byId("goal" + i + "Owner").value.trim() || "Unassigned",
-            target: byId("goal" + i + "Target").value.trim() || "Target pending",
-            deadline: formatDate(byId("goal" + i + "Deadline").value),
-            source: byId("goal" + i + "Source").value || "SWOT + Whitespace"
-          });
-        }
-
-        var goalContainer = byId("goalCards");
-        goalContainer.innerHTML = "";
-
-        if (!goals.length) {
-          var empty = document.createElement("article");
-          empty.className = "goal-card";
-          var title = document.createElement("h3");
-          title.textContent = "No strategic objectives added yet";
-          var body = document.createElement("p");
-          body.className = "goal-objective";
-          body.textContent = "Add up to five objectives from the input panel.";
-          empty.appendChild(title);
-          empty.appendChild(body);
-          goalContainer.appendChild(empty);
-          return;
-        }
-
-        goals.forEach(function (goal, index) {
-          var card = document.createElement("article");
-          card.className = "goal-card";
-
-          var title = document.createElement("h3");
-          title.textContent = "Goal " + (index + 1);
-          var objective = document.createElement("p");
-          objective.className = "goal-objective";
-          objective.textContent = goal.objective;
-
-          var meta = document.createElement("dl");
-          meta.className = "goal-meta";
-
-          [
-            { label: "Owner", value: goal.owner },
-            { label: "Target", value: goal.target },
-            { label: "Deadline", value: goal.deadline },
-            { label: "Informed by", value: goal.source }
-          ].forEach(function (row) {
-            var line = document.createElement("div");
-            var label = document.createElement("span");
-            label.textContent = row.label;
-            var value = document.createElement("strong");
-            value.textContent = row.value;
-            line.appendChild(label);
-            line.appendChild(value);
-            meta.appendChild(line);
-          });
-
-          card.appendChild(title);
-          card.appendChild(objective);
-          card.appendChild(meta);
-          goalContainer.appendChild(card);
-        });
-      }
-
       function renderStrategies() {
         var selected = strategyChecks
           .filter(function (check) {
@@ -2014,33 +1719,6 @@ Procurement and legal support for contract consolidation options.</textarea>
           "Add pipeline items explicitly linked to selected strategies.",
           8
         );
-
-        renderBulletList(
-          "strengthList",
-          readLines("swotStrengths"),
-          "Add 3 to 5 prioritized strengths.",
-          5
-        );
-        renderBulletList(
-          "weaknessList",
-          readLines("swotWeaknesses"),
-          "Add 3 to 5 prioritized weaknesses.",
-          5
-        );
-        renderBulletList(
-          "swotOpportunityList",
-          readLines("swotOpportunities"),
-          "Add 3 to 5 prioritized opportunities.",
-          5
-        );
-        renderBulletList(
-          "threatList",
-          readLines("swotThreats"),
-          "Add 3 to 5 prioritized threats.",
-          5
-        );
-
-        renderGoals();
 
         renderBulletList(
           "helpList",
