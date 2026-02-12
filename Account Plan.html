@@ -8,12 +8,12 @@
     :root {
       --bg: #f4f7fc;
       --surface: #ffffff;
-      --surface-soft: #f8faff;
+      --surface-soft: #f9fbff;
       --border: #d9e3f3;
-      --text: #15223d;
+      --text: #14213d;
       --muted: #5d6b85;
       --accent: #1f57d6;
-      --accent-soft: #e9f0ff;
+      --accent-soft: #e8f0ff;
       --success: #1f8a4c;
       --warning: #b7791f;
       --danger: #c53030;
@@ -35,7 +35,7 @@
     }
 
     .app {
-      max-width: 1460px;
+      max-width: 1480px;
       margin: 0 auto;
       padding: 18px;
       display: grid;
@@ -51,20 +51,20 @@
 
     .toolbar {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      padding: 18px 20px;
+      align-items: center;
+      gap: 16px;
       flex-wrap: wrap;
+      padding: 18px 20px;
     }
 
     .eyebrow {
       margin: 0 0 4px;
+      color: var(--muted);
+      font-weight: 700;
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--muted);
-      font-weight: 700;
     }
 
     .toolbar h1 {
@@ -77,7 +77,7 @@
       margin: 6px 0 0;
       color: var(--muted);
       font-size: 0.95rem;
-      max-width: 660px;
+      max-width: 760px;
     }
 
     .toolbar-actions {
@@ -109,7 +109,7 @@
 
     .workspace {
       display: grid;
-      grid-template-columns: minmax(330px, 380px) minmax(0, 1fr);
+      grid-template-columns: minmax(330px, 390px) minmax(0, 1fr);
       gap: 14px;
       align-items: start;
     }
@@ -124,7 +124,7 @@
 
     .input-panel h2 {
       margin: 0;
-      font-size: 1.15rem;
+      font-size: 1.16rem;
     }
 
     .panel-copy {
@@ -141,18 +141,23 @@
 
     .form-section h3 {
       margin: 0 0 10px;
-      font-size: 0.96rem;
+      font-size: 0.97rem;
       letter-spacing: 0.01em;
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
       gap: 10px;
     }
 
     .form-grid.compact-three {
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(124px, 1fr));
+    }
+
+    .stack {
+      display: grid;
+      gap: 10px;
     }
 
     label {
@@ -184,7 +189,7 @@
 
     textarea {
       resize: vertical;
-      min-height: 76px;
+      min-height: 78px;
       line-height: 1.45;
     }
 
@@ -196,9 +201,9 @@
     }
 
     input[type="range"] {
-      padding: 0;
       min-height: auto;
       height: 6px;
+      padding: 0;
       accent-color: var(--accent);
     }
 
@@ -228,13 +233,30 @@
       border-radius: 10px;
       padding: 8px 10px;
       background: #fbfdff;
-      margin-bottom: 10px;
     }
 
     .toggle-row span {
       font-size: 0.82rem;
       color: var(--muted);
       font-weight: 600;
+    }
+
+    .contracts-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .contract-input {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      background: #fcfdff;
+    }
+
+    .contract-input h4 {
+      margin: 0 0 8px;
+      font-size: 0.89rem;
     }
 
     .product-selector {
@@ -269,6 +291,21 @@
       font-weight: 500;
     }
 
+    .strategy-selector {
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      background: #fbfdff;
+    }
+
+    .strategy-selector p {
+      margin: 0 0 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
     .goal-input {
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -280,6 +317,12 @@
     .goal-input h4 {
       margin: 0 0 8px;
       font-size: 0.9rem;
+    }
+
+    .input-note {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
     }
 
     .summary-panel {
@@ -335,7 +378,7 @@
       text-align: right;
       font-size: 0.88rem;
       font-weight: 700;
-      max-width: 56%;
+      max-width: 58%;
     }
 
     .metrics-card {
@@ -363,7 +406,7 @@
     .kpi-item p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.77rem;
+      font-size: 0.76rem;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
@@ -380,14 +423,16 @@
       border-radius: 11px;
       background: #fff;
       padding: 9px 10px;
+      display: grid;
+      gap: 8px;
     }
 
     .split-labels {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
       font-size: 0.83rem;
-      margin-bottom: 8px;
       color: var(--muted);
       font-weight: 600;
     }
@@ -421,15 +466,21 @@
       background: linear-gradient(90deg, #98b2f5 0%, #7697ea 100%);
     }
 
+    .section-title {
+      margin: 0 0 8px;
+      font-size: 1.02rem;
+    }
+
+    .section-subnote {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
     .two-column {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
-    }
-
-    .two-column h2 {
-      margin: 0 0 8px;
-      font-size: 1.02rem;
     }
 
     .two-column h3 {
@@ -495,6 +546,33 @@
       font-size: 0.84rem;
     }
 
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.86rem;
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
     .bullet-list {
       margin: 0;
       padding-left: 18px;
@@ -511,101 +589,6 @@
     .muted-item {
       color: var(--muted);
       font-style: italic;
-    }
-
-    .trend-panel {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px;
-      background: #fcfdff;
-    }
-
-    .trend-panel h3 {
-      margin: 0 0 12px;
-    }
-
-    .trend-chart {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 10px;
-      min-height: 145px;
-    }
-
-    .trend-col {
-      flex: 1;
-      min-width: 88px;
-      text-align: center;
-      display: grid;
-      gap: 7px;
-      justify-items: center;
-    }
-
-    .trend-track {
-      width: 30px;
-      height: 102px;
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      background: #eef3fb;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: end;
-    }
-
-    .trend-fill {
-      width: 100%;
-      height: 0;
-      border-radius: 10px;
-      background: linear-gradient(180deg, #4f7ef8 0%, #1f57d6 100%);
-      transition: height 280ms ease;
-    }
-
-    .trend-col span {
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 600;
-    }
-
-    .trend-col strong {
-      font-size: 0.87rem;
-    }
-
-    details.account-lens {
-      padding: 0;
-      overflow: hidden;
-    }
-
-    details.account-lens summary {
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      padding: 14px 16px;
-      border-bottom: 1px solid var(--border);
-      user-select: none;
-    }
-
-    details.account-lens summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .summary-note {
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-size: 0.86rem;
-    }
-
-    .details-hint {
-      color: var(--muted);
-      font-size: 0.8rem;
-      white-space: nowrap;
-    }
-
-    details.account-lens > div {
-      padding: 14px 16px 16px;
     }
 
     .donut-wrap {
@@ -681,6 +664,68 @@
       background: #fff1e5;
       border-color: #f6c89f;
       color: #ba5a18;
+    }
+
+    details.account-lens {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    details.account-lens summary {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      user-select: none;
+    }
+
+    details.account-lens summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .summary-note {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .details-hint {
+      color: var(--muted);
+      font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    details.account-lens > div {
+      padding: 14px 16px 16px;
+    }
+
+    .status-grid {
+      display: grid;
+      gap: 9px;
+    }
+
+    .status-row {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 9px;
+      background: #fcfdff;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.84rem;
+    }
+
+    .status-row span {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .status-row strong {
+      text-align: right;
     }
 
     .swot-grid {
@@ -766,6 +811,16 @@
       font-size: 0.84rem;
     }
 
+    .help-note {
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid #d6e2f6;
+      border-radius: 10px;
+      background: #f8fbff;
+      color: #2d3c5a;
+      font-size: 0.88rem;
+    }
+
     .summary-footer h2 {
       margin: 0;
       font-size: 1rem;
@@ -795,11 +850,7 @@
       z-index: 20;
     }
 
-    body.presentation-mode .details-hint {
-      display: none;
-    }
-
-    @media (max-width: 1220px) {
+    @media (max-width: 1240px) {
       .workspace {
         grid-template-columns: 1fr;
       }
@@ -810,7 +861,7 @@
       }
     }
 
-    @media (max-width: 880px) {
+    @media (max-width: 920px) {
       .overview-grid {
         grid-template-columns: 1fr;
       }
@@ -852,11 +903,6 @@
         padding: 0;
       }
 
-      .toolbar {
-        box-shadow: none;
-        border-color: #cdd5e5;
-      }
-
       #presentationToggle {
         display: none;
       }
@@ -883,7 +929,7 @@
         <p class="eyebrow">Enterprise Account Planning UI</p>
         <h1 id="outHeaderCustomer">Northstar Financial Group</h1>
         <p class="subhead">
-          Executive account plan optimized for immediate insight, structured input, and presentation-ready output.
+          Executive planning view designed for collaboration, rapid insight, and practical account decisions.
         </p>
       </div>
       <div class="toolbar-actions">
@@ -893,9 +939,9 @@
     </header>
 
     <div class="workspace">
-      <aside class="input-panel card" id="inputPanel" aria-label="Account planning input section">
+      <aside class="input-panel card" aria-label="Account planning input section">
         <h2>Input workspace</h2>
-        <p class="panel-copy">Edit structured and unstructured fields to update the executive summary in real time.</p>
+        <p class="panel-copy">Capture what you know, call out gaps clearly, and keep the discussion focused on actions.</p>
 
         <form id="planningForm" novalidate>
           <section class="form-section">
@@ -908,6 +954,10 @@
               <label>
                 Account executive name
                 <input id="aeName" type="text" value="Dana Morales" />
+              </label>
+              <label>
+                AE tenure as account owner
+                <input id="aeTenure" type="text" value="18 months" placeholder="e.g., 2 years, 4 months" />
               </label>
               <label>
                 Ownership type
@@ -924,9 +974,20 @@
                 Direct manager
                 <input id="directManager" type="text" value="VP Enterprise Sales - Priya Raman" />
               </label>
+            </div>
+
+            <div class="form-grid" style="margin-top: 10px;">
+              <div class="toggle-row">
+                <span>Customer Success Manager assigned?</span>
+                <input id="hasCsm" type="checkbox" checked />
+              </div>
+              <label id="csmNameLabel">
+                Customer Success Manager name
+                <input id="csmName" type="text" value="Martin Lee" />
+              </label>
               <label>
-                Matrixed reporting (if applicable)
-                <input id="matrixReporting" type="text" value="Matrixed to Global Industry GTM Lead and Regional COO" />
+                Highest Tungsten exec alignment
+                <input id="highestExecAlignment" type="text" value="Chief Revenue Officer" />
               </label>
             </div>
           </section>
@@ -947,27 +1008,27 @@
                 <input id="customerTotalRevenue" type="number" min="0" step="10000000" value="4600000000" />
               </label>
               <label>
-                Priority countries/markets
-                <input id="topCountries" type="text" value="United States, Germany, Japan, Brazil" />
+                Major geographies we are serving
+                <input id="majorGeographies" type="text" value="US, Germany, UK, Japan, Brazil" />
               </label>
             </div>
 
             <div class="form-grid" style="margin-top: 10px;">
               <label>
-                ARR Pillar: Platform
-                <input id="arrPillarPlatform" type="number" min="0" step="500000" value="28000000" />
+                ARR pillar: Document Workflow Automation
+                <input id="arrPillarDocumentWorkflow" type="number" min="0" step="500000" value="28000000" />
               </label>
               <label>
-                ARR Pillar: Security
-                <input id="arrPillarSecurity" type="number" min="0" step="500000" value="22000000" />
+                ARR pillar: AP &amp; AR Automation
+                <input id="arrPillarApAr" type="number" min="0" step="500000" value="22000000" />
               </label>
               <label>
-                ARR Pillar: Data and AI
-                <input id="arrPillarData" type="number" min="0" step="500000" value="18000000" />
+                ARR pillar: Print &amp; Workplace Automation
+                <input id="arrPillarPrintWorkplace" type="number" min="0" step="500000" value="18000000" />
               </label>
               <label>
-                ARR Pillar: Services
-                <input id="arrPillarServices" type="number" min="0" step="500000" value="16000000" />
+                ARR pillar: PDF &amp; eSignature
+                <input id="arrPillarPdfEsignature" type="number" min="0" step="500000" value="16000000" />
               </label>
             </div>
 
@@ -990,7 +1051,7 @@
               </label>
             </div>
 
-            <div style="margin-top: 10px;">
+            <div class="form-grid" style="margin-top: 10px;">
               <label>
                 <span class="range-label">
                   Direct revenue split
@@ -998,9 +1059,17 @@
                 </span>
                 <input id="directSplit" type="range" min="0" max="100" step="1" value="62" />
               </label>
+              <label>
+                Commercial type focus
+                <select id="commercialType">
+                  <option selected>SaaS</option>
+                  <option>Subscription</option>
+                  <option>Maintenance</option>
+                </select>
+              </label>
             </div>
 
-            <div style="margin-top: 10px;">
+            <div class="stack" style="margin-top: 10px;">
               <div class="toggle-row">
                 <span>CPO present?</span>
                 <input id="cpoPresent" type="checkbox" checked />
@@ -1015,81 +1084,158 @@
                   <option value="Shared Services">Shared Services</option>
                 </select>
               </label>
-              <label style="margin-top: 10px;">
+              <label>
                 Procurement structure notes
                 <textarea id="procurementNotes">Centralized sourcing model with regional buying teams in EMEA and APAC.</textarea>
               </label>
             </div>
-          </section>
 
-          <section class="form-section">
-            <h3>3. Industry Lens</h3>
-            <label>
-              Key industry trends (one per line)
-              <textarea id="industryTrends">Digital core modernization accelerating in tier-1 banks.
-Increased supervisory pressure on operational resilience.
-AI governance becoming a board-level discussion.
-Vendor consolidation programs tied to cost optimization.</textarea>
-            </label>
-            <label style="margin-top: 10px;">
-              Analyst and benchmark signals (one per line)
-              <textarea id="analystBenchmarks">Analyst forecast: 9% CAGR in enterprise workflow platforms through 2029.
-Peer benchmark: top quartile institutions run 25% fewer strategic vendors.
-Regulatory update: expanded controls around third-party risk and data lineage.</textarea>
-            </label>
-            <div class="form-grid" style="margin-top: 10px;">
-              <label>
-                Market growth (%)
-                <input id="marketGrowth" type="number" min="0" max="40" step="0.1" value="7.2" />
-              </label>
-              <label>
-                Digital investment growth (%)
-                <input id="digitalGrowth" type="number" min="0" max="50" step="0.1" value="11.4" />
-              </label>
-              <label>
-                Regulatory intensity (0-10)
-                <input id="regulatoryPressure" type="number" min="0" max="10" step="0.1" value="6.0" />
-              </label>
+            <h3 style="margin-top: 14px;">ARR spread over major contracts</h3>
+            <div class="contracts-grid">
+              <div class="contract-input">
+                <h4>Contract 1</h4>
+                <div class="form-grid compact-three">
+                  <label>Product<input id="contract1Product" type="text" value="Document Workflow Suite" /></label>
+                  <label>ARR (USD)<input id="contract1Arr" type="number" min="0" step="100000" value="22000000" /></label>
+                  <label>Type<select id="contract1Type"><option selected>SaaS</option><option>Sub</option><option>Perp</option></select></label>
+                  <label>Term<input id="contract1Term" type="text" value="3-year" /></label>
+                  <label>Next renewal / anniversary<input id="contract1Renewal" type="date" value="2026-09-30" /></label>
+                  <label>Route<select id="contract1Route"><option selected>Direct</option><option>Indirect</option></select></label>
+                </div>
+              </div>
+
+              <div class="contract-input">
+                <h4>Contract 2</h4>
+                <div class="form-grid compact-three">
+                  <label>Product<input id="contract2Product" type="text" value="AP and AR Automation Cloud" /></label>
+                  <label>ARR (USD)<input id="contract2Arr" type="number" min="0" step="100000" value="18000000" /></label>
+                  <label>Type<select id="contract2Type"><option>SaaS</option><option selected>Sub</option><option>Perp</option></select></label>
+                  <label>Term<input id="contract2Term" type="text" value="5-year" /></label>
+                  <label>Next renewal / anniversary<input id="contract2Renewal" type="date" value="2027-03-31" /></label>
+                  <label>Route<select id="contract2Route"><option>Direct</option><option selected>Indirect</option></select></label>
+                </div>
+              </div>
+
+              <div class="contract-input">
+                <h4>Contract 3</h4>
+                <div class="form-grid compact-three">
+                  <label>Product<input id="contract3Product" type="text" value="Print and Workplace Automation" /></label>
+                  <label>ARR (USD)<input id="contract3Arr" type="number" min="0" step="100000" value="14000000" /></label>
+                  <label>Type<select id="contract3Type"><option>SaaS</option><option selected>Sub</option><option>Perp</option></select></label>
+                  <label>Term<input id="contract3Term" type="text" value="3-year" /></label>
+                  <label>Next renewal / anniversary<input id="contract3Renewal" type="date" value="2026-12-31" /></label>
+                  <label>Route<select id="contract3Route"><option selected>Direct</option><option>Indirect</option></select></label>
+                </div>
+              </div>
+
+              <div class="contract-input">
+                <h4>Contract 4</h4>
+                <div class="form-grid compact-three">
+                  <label>Product<input id="contract4Product" type="text" value="PDF and eSignature Platform" /></label>
+                  <label>ARR (USD)<input id="contract4Arr" type="number" min="0" step="100000" value="12000000" /></label>
+                  <label>Type<select id="contract4Type"><option selected>SaaS</option><option>Sub</option><option>Perp</option></select></label>
+                  <label>Term<input id="contract4Term" type="text" value="2-year" /></label>
+                  <label>Next renewal / anniversary<input id="contract4Renewal" type="date" value="2026-07-15" /></label>
+                  <label>Route<select id="contract4Route"><option selected>Direct</option><option>Indirect</option></select></label>
+                </div>
+              </div>
             </div>
           </section>
 
           <section class="form-section">
-            <h3>4. Account Lens</h3>
+            <h3>3. Top problems we are solving for the client</h3>
             <label>
-              Strategic initiatives (one per line)
-              <textarea id="strategicInitiatives">Consolidate digital onboarding platforms into one operating model.
-Expand automation in risk, fraud, and compliance workflows.
-Increase cloud-native deployment footprint to improve release velocity.
-Launch enterprise AI controls program with measurable governance metrics.</textarea>
+              Top problems (one per line)
+              <textarea id="topProblems">Reduce invoice exception handling and cycle times.
+Lower operating cost in shared services through automation.
+Improve audit readiness and compliance evidence quality.
+Increase document and signature throughput for customer onboarding.</textarea>
             </label>
-            <label style="margin-top: 10px;">
-              Pertinent account information (one per line)
-              <textarea id="accountNotes">New CIO joined in Q4 with mandate for platform simplification.
-Acquired a regional payments processor in APAC.
-Investor communication highlights margin expansion through process efficiency.
-Board approved a 3-year transformation funding package.</textarea>
-            </label>
+            <p class="input-note">It is okay to have gaps here. Identify them clearly.</p>
           </section>
 
           <section class="form-section">
-            <h3>5. Product Whitespace Analysis</h3>
+            <h3>4. Product Whitespace Analysis</h3>
             <fieldset class="product-selector">
               <legend>Products currently owned</legend>
               <div class="checkbox-grid">
-                <label><input type="checkbox" data-product="Platform Core" checked />Platform Core</label>
-                <label><input type="checkbox" data-product="Security Suite" checked />Security Suite</label>
-                <label><input type="checkbox" data-product="Data Cloud" checked />Data Cloud</label>
-                <label><input type="checkbox" data-product="AI Copilot" />AI Copilot</label>
-                <label><input type="checkbox" data-product="Workflow Automation" />Workflow Automation</label>
-                <label><input type="checkbox" data-product="Observability" />Observability</label>
-                <label><input type="checkbox" data-product="Compliance Manager" checked />Compliance Manager</label>
-                <label><input type="checkbox" data-product="Partner Exchange" />Partner Exchange</label>
-                <label><input type="checkbox" data-product="Premium Support" checked />Premium Support</label>
+                <label><input type="checkbox" data-product="Document Workflow Suite" checked />Document Workflow Suite</label>
+                <label><input type="checkbox" data-product="AP Automation" checked />AP Automation</label>
+                <label><input type="checkbox" data-product="AR Automation" checked />AR Automation</label>
+                <label><input type="checkbox" data-product="Print Automation" checked />Print Automation</label>
+                <label><input type="checkbox" data-product="Workplace Automation" />Workplace Automation</label>
+                <label><input type="checkbox" data-product="PDF Platform" checked />PDF Platform</label>
+                <label><input type="checkbox" data-product="eSignature" checked />eSignature</label>
+                <label><input type="checkbox" data-product="AI Document Intelligence" />AI Document Intelligence</label>
+                <label><input type="checkbox" data-product="Process Mining" />Process Mining</label>
               </div>
             </fieldset>
             <label style="margin-top: 10px;">
               Whitespace opportunity notes
-              <textarea id="whitespaceNotes">Prioritize AI Copilot and Workflow Automation in retail operations and fraud control functions.</textarea>
+              <textarea id="whitespaceNotes">Prioritize Workplace Automation and AI Document Intelligence in finance transformation and operations teams.</textarea>
+            </label>
+          </section>
+
+          <section class="form-section">
+            <h3>5. Account Lens</h3>
+            <label>
+              Strategic initiatives (one per line)
+              <textarea id="strategicInitiatives">Consolidate fragmented document operations into one global operating model.
+Expand automation in risk, fraud, and compliance workflows.
+Standardize digital channels for customer onboarding and servicing.</textarea>
+            </label>
+            <label style="margin-top: 10px;">
+              Pertinent account information (one per line)
+              <textarea id="accountNotes">New CIO joined in Q4 with mandate for platform simplification.
+Board approved multi-year transformation funding.
+Recent acquisition expanded APAC footprint and integration complexity.</textarea>
+            </label>
+
+            <div class="form-grid" style="margin-top: 10px;">
+              <label>
+                The usage of the capacity they already own is...
+                <input id="capacityUsage" type="text" value="Approximately 64% consumed across core workloads." />
+              </label>
+              <label>
+                Their level of satisfaction is...
+                <input id="satisfactionLevel" type="text" value="Moderate-to-high, with concerns on deployment speed in APAC." />
+              </label>
+              <label>
+                The major geographies we are serving are...
+                <input id="geographiesServing" type="text" value="US, UK, Germany, Japan, Singapore, Brazil" />
+              </label>
+              <label>
+                Date of our last top-to-top meeting
+                <input id="lastTopMeeting" type="date" value="2026-01-15" />
+              </label>
+            </div>
+
+            <label style="margin-top: 10px;">
+              Status of our relationships (include business sponsors, IT, InfoSec, AI Lab / COE, Procurement)
+              <textarea id="relationshipStatus">Business sponsors: strong support tied to efficiency KPIs.
+IT architecture: positive but asks for clearer integration roadmap.
+InfoSec: neutral; requires tighter third-party controls evidence.
+AI Lab / COE: emerging relationship with pilot interest.
+Procurement: cost-focused and increasingly involved in scope decisions.</textarea>
+            </label>
+
+            <div class="strategy-selector" style="margin-top: 10px;">
+              <p>Our basic strategy is (select all that apply)</p>
+              <div class="checkbox-grid">
+                <label><input type="checkbox" data-strategy="Protect the downside and focus on early renewal, contract consolidations, move-ups, utilize existing capacity" checked />Protect downside + early renewal + move-ups</label>
+                <label><input type="checkbox" data-strategy="Expand geographically" checked />Expand geographically</label>
+                <label><input type="checkbox" data-strategy="Expand new divisions" />Expand new divisions</label>
+                <label><input type="checkbox" data-strategy="Expand new use cases in existing geographies and or divisions" checked />Expand new use cases</label>
+                <label><input type="checkbox" data-strategy="Cross sell new products" checked />Cross sell new products</label>
+                <label><input type="checkbox" data-strategy="Expand relationships to X" />Expand relationships to X</label>
+              </div>
+            </div>
+
+            <label style="margin-top: 10px;">
+              These strategies are manifested in this pipeline (linked to strategy)
+              <textarea id="strategyPipeline">Early renewal and consolidation package for Document Workflow Suite (Q3 close target).
+Cross-sell motion for AI Document Intelligence in AP and fraud workflows.
+Geographic expansion plan for Japan and Singapore shared services centers.</textarea>
             </label>
           </section>
 
@@ -1097,61 +1243,43 @@ Board approved a 3-year transformation funding package.</textarea>
             <h3>6. SWOT Analysis</h3>
             <label>
               Strengths (3-5 evidence-based points)
-              <textarea id="swotStrengths">Deep executive alignment across CIO and COO organizations.
+              <textarea id="swotStrengths">Deep executive alignment with CIO and COO stakeholders.
 Strong platform adoption in mission-critical workflows.
-Proven implementation outcomes with measurable cycle-time reduction.</textarea>
+Documented value realization in cycle-time and error-rate reduction.</textarea>
             </label>
             <label style="margin-top: 10px;">
               Weaknesses (3-5 evidence-based points)
               <textarea id="swotWeaknesses">Limited penetration in APAC business units.
-Complex procurement cycle impacts expansion timing.
-Inconsistent executive narrative across regional teams.</textarea>
+Procurement cycle complexity slows expansion timing.
+Inconsistent account narrative across regional teams.</textarea>
             </label>
             <label style="margin-top: 10px;">
               Opportunities (3-5 evidence-based points)
-              <textarea id="swotOpportunities">Cross-sell AI Copilot into high-volume service teams.
-Attach Workflow Automation to resilience programs.
-Expand premium support with transformation governance services.</textarea>
+              <textarea id="swotOpportunities">Attach AI Document Intelligence to compliance and fraud priorities.
+Expand Workplace Automation into newly acquired divisions.
+Increase direct executive cadence tied to transformation metrics.</textarea>
             </label>
             <label style="margin-top: 10px;">
               Threats (3-5 evidence-based points)
-              <textarea id="swotThreats">Competing vendor bundling with aggressive pricing.
-Budget reallocation due to macro pressure.
-Regulatory scrutiny can delay new platform rollouts.</textarea>
+              <textarea id="swotThreats">Competitive bundling pressure from large platform vendors.
+Budget tightening if macro signals weaken.
+Regulatory changes can delay production rollout timelines.</textarea>
             </label>
           </section>
 
           <section class="form-section">
-            <h3>7. Strategic Objectives (SMART Goals, up to 5)</h3>
-
+            <h3>7. Strategic Objectives</h3>
             <div class="goal-input">
               <h4>Goal 1</h4>
               <label>
                 Objective
-                <input id="goal1Objective" type="text" value="Increase AI Copilot ARR by $6M through phased rollout in fraud and service operations." />
+                <input id="goal1Objective" type="text" value="Increase AI Document Intelligence ARR by $6M via fraud and AP expansion plays." />
               </label>
               <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>
-                  Owner
-                  <input id="goal1Owner" type="text" value="Dana Morales" />
-                </label>
-                <label>
-                  Target metric
-                  <input id="goal1Target" type="text" value="$6M net-new ARR" />
-                </label>
-                <label>
-                  Deadline
-                  <input id="goal1Deadline" type="date" value="2026-09-30" />
-                </label>
-                <label>
-                  Informed by
-                  <select id="goal1Source">
-                    <option selected>SWOT + Whitespace</option>
-                    <option>SWOT</option>
-                    <option>Whitespace</option>
-                    <option>Industry Lens</option>
-                  </select>
-                </label>
+                <label>Owner<input id="goal1Owner" type="text" value="Dana Morales" /></label>
+                <label>Target metric<input id="goal1Target" type="text" value="$6M net-new ARR" /></label>
+                <label>Deadline<input id="goal1Deadline" type="date" value="2026-09-30" /></label>
+                <label>Informed by<select id="goal1Source"><option selected>SWOT + Whitespace</option><option>SWOT</option><option>Whitespace</option><option>Account Lens</option></select></label>
               </div>
             </div>
 
@@ -1159,30 +1287,13 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
               <h4>Goal 2</h4>
               <label>
                 Objective
-                <input id="goal2Objective" type="text" value="Lift EMEA expansion pipeline coverage to 3.2x by aligning procurement and transformation milestones." />
+                <input id="goal2Objective" type="text" value="Lift EMEA pipeline coverage to 3.2x through procurement alignment and renewal sequencing." />
               </label>
               <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>
-                  Owner
-                  <input id="goal2Owner" type="text" value="EMEA Regional Director" />
-                </label>
-                <label>
-                  Target metric
-                  <input id="goal2Target" type="text" value="3.2x qualified pipeline" />
-                </label>
-                <label>
-                  Deadline
-                  <input id="goal2Deadline" type="date" value="2026-08-15" />
-                </label>
-                <label>
-                  Informed by
-                  <select id="goal2Source">
-                    <option>SWOT + Whitespace</option>
-                    <option selected>SWOT</option>
-                    <option>Whitespace</option>
-                    <option>Industry Lens</option>
-                  </select>
-                </label>
+                <label>Owner<input id="goal2Owner" type="text" value="EMEA Regional Director" /></label>
+                <label>Target metric<input id="goal2Target" type="text" value="3.2x qualified pipeline" /></label>
+                <label>Deadline<input id="goal2Deadline" type="date" value="2026-08-15" /></label>
+                <label>Informed by<select id="goal2Source"><option>SWOT + Whitespace</option><option selected>SWOT</option><option>Whitespace</option><option>Account Lens</option></select></label>
               </div>
             </div>
 
@@ -1190,30 +1301,13 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
               <h4>Goal 3</h4>
               <label>
                 Objective
-                <input id="goal3Objective" type="text" value="Secure board-level commitment for a three-year platform standardization roadmap." />
+                <input id="goal3Objective" type="text" value="Secure 3-year executive-approved platform roadmap across Document Workflow and AP/AR Automation." />
               </label>
               <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>
-                  Owner
-                  <input id="goal3Owner" type="text" value="Global CIO Sponsor" />
-                </label>
-                <label>
-                  Target metric
-                  <input id="goal3Target" type="text" value="Signed roadmap + executive steering cadence" />
-                </label>
-                <label>
-                  Deadline
-                  <input id="goal3Deadline" type="date" value="2026-12-15" />
-                </label>
-                <label>
-                  Informed by
-                  <select id="goal3Source">
-                    <option>SWOT + Whitespace</option>
-                    <option>SWOT</option>
-                    <option>Whitespace</option>
-                    <option selected>Industry Lens</option>
-                  </select>
-                </label>
+                <label>Owner<input id="goal3Owner" type="text" value="Global CIO Sponsor" /></label>
+                <label>Target metric<input id="goal3Target" type="text" value="Signed roadmap and steering cadence" /></label>
+                <label>Deadline<input id="goal3Deadline" type="date" value="2026-12-15" /></label>
+                <label>Informed by<select id="goal3Source"><option>SWOT + Whitespace</option><option>SWOT</option><option>Whitespace</option><option selected>Account Lens</option></select></label>
               </div>
             </div>
 
@@ -1224,27 +1318,10 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
                 <input id="goal4Objective" type="text" value="" placeholder="Optional objective" />
               </label>
               <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>
-                  Owner
-                  <input id="goal4Owner" type="text" value="" placeholder="Goal owner" />
-                </label>
-                <label>
-                  Target metric
-                  <input id="goal4Target" type="text" value="" placeholder="Target metric" />
-                </label>
-                <label>
-                  Deadline
-                  <input id="goal4Deadline" type="date" value="" />
-                </label>
-                <label>
-                  Informed by
-                  <select id="goal4Source">
-                    <option selected>SWOT + Whitespace</option>
-                    <option>SWOT</option>
-                    <option>Whitespace</option>
-                    <option>Industry Lens</option>
-                  </select>
-                </label>
+                <label>Owner<input id="goal4Owner" type="text" value="" placeholder="Goal owner" /></label>
+                <label>Target metric<input id="goal4Target" type="text" value="" placeholder="Target metric" /></label>
+                <label>Deadline<input id="goal4Deadline" type="date" value="" /></label>
+                <label>Informed by<select id="goal4Source"><option selected>SWOT + Whitespace</option><option>SWOT</option><option>Whitespace</option><option>Account Lens</option></select></label>
               </div>
             </div>
 
@@ -1255,88 +1332,60 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
                 <input id="goal5Objective" type="text" value="" placeholder="Optional objective" />
               </label>
               <div class="form-grid compact-three" style="margin-top: 8px;">
-                <label>
-                  Owner
-                  <input id="goal5Owner" type="text" value="" placeholder="Goal owner" />
-                </label>
-                <label>
-                  Target metric
-                  <input id="goal5Target" type="text" value="" placeholder="Target metric" />
-                </label>
-                <label>
-                  Deadline
-                  <input id="goal5Deadline" type="date" value="" />
-                </label>
-                <label>
-                  Informed by
-                  <select id="goal5Source">
-                    <option selected>SWOT + Whitespace</option>
-                    <option>SWOT</option>
-                    <option>Whitespace</option>
-                    <option>Industry Lens</option>
-                  </select>
-                </label>
+                <label>Owner<input id="goal5Owner" type="text" value="" placeholder="Goal owner" /></label>
+                <label>Target metric<input id="goal5Target" type="text" value="" placeholder="Target metric" /></label>
+                <label>Deadline<input id="goal5Deadline" type="date" value="" /></label>
+                <label>Informed by<select id="goal5Source"><option selected>SWOT + Whitespace</option><option>SWOT</option><option>Whitespace</option><option>Account Lens</option></select></label>
               </div>
             </div>
+          </section>
+
+          <section class="form-section">
+            <h3>8. Here is how we need help...</h3>
+            <label>
+              Collaboration and support needed (one per line)
+              <textarea id="helpNeeded">Executive sponsor support for top-to-top meeting preparation.
+PS architect support to strengthen integration roadmap in APAC.
+Customer Success support for adoption plan and value story.
+Procurement and legal support for contract consolidation options.</textarea>
+            </label>
+            <p class="input-note">
+              I realize we may not know many of these answers at the time we meet. Don't try to hide this, just tell it
+              like it is. Do your homework, but don't worry about making a pretty presentation. Make sure you have PS,
+              Customer Success, and whatever other resources you need in the meeting.
+            </p>
+            <p class="input-note">
+              The tone of the internal meeting is one of collaboration and brainstorming - not the AE defending their
+              position. We are one team.
+            </p>
           </section>
         </form>
       </aside>
 
-      <section class="summary-panel" id="executiveSummary" aria-label="Executive summary output section">
+      <section class="summary-panel" aria-label="Executive summary output section">
         <section class="card overview-grid">
           <article class="owner-card">
             <h2>1. Account Executive and Ownership</h2>
             <dl class="key-value">
-              <div>
-                <dt>Account Executive</dt>
-                <dd id="outAeName">-</dd>
-              </div>
-              <div>
-                <dt>Ownership Type</dt>
-                <dd id="outOwnershipType">-</dd>
-              </div>
-              <div>
-                <dt>Role and Region</dt>
-                <dd id="outRoleRegion">-</dd>
-              </div>
-              <div>
-                <dt>Direct Manager</dt>
-                <dd id="outDirectManager">-</dd>
-              </div>
-              <div>
-                <dt>Matrixed Reporting</dt>
-                <dd id="outMatrixReporting">-</dd>
-              </div>
+              <div><dt>Account Executive</dt><dd id="outAeName">-</dd></div>
+              <div><dt>AE tenure as owner</dt><dd id="outAeTenure">-</dd></div>
+              <div><dt>Ownership Type</dt><dd id="outOwnershipType">-</dd></div>
+              <div><dt>Role and Region</dt><dd id="outRoleRegion">-</dd></div>
+              <div><dt>Direct Manager</dt><dd id="outDirectManager">-</dd></div>
+              <div><dt>Customer Success Manager</dt><dd id="outCsm">-</dd></div>
+              <div><dt>Highest Tungsten exec alignment</dt><dd id="outHighestExecAlignment">-</dd></div>
             </dl>
           </article>
 
           <article class="metrics-card">
             <h2>2. Account and Revenue Metrics</h2>
             <div class="kpi-grid">
-              <div class="kpi-item">
-                <p>Current ARR</p>
-                <strong id="outArrTotal">$0</strong>
-              </div>
-              <div class="kpi-item">
-                <p>Employees</p>
-                <strong id="outEmployees">0</strong>
-              </div>
-              <div class="kpi-item">
-                <p>Customer Revenue</p>
-                <strong id="outCustomerRevenue">$0</strong>
-              </div>
-              <div class="kpi-item">
-                <p>Procurement Structure</p>
-                <strong id="outProcurement">-</strong>
-              </div>
-              <div class="kpi-item">
-                <p>Revenue Split</p>
-                <strong id="outRevenueSplit">-</strong>
-              </div>
-              <div class="kpi-item">
-                <p>Top Revenue Region</p>
-                <strong id="outTopRegion">-</strong>
-              </div>
+              <div class="kpi-item"><p>Current ARR</p><strong id="outArrTotal">$0</strong></div>
+              <div class="kpi-item"><p>Employees</p><strong id="outEmployees">0</strong></div>
+              <div class="kpi-item"><p>Customer Revenue</p><strong id="outCustomerRevenue">$0</strong></div>
+              <div class="kpi-item"><p>Commercial Type</p><strong id="outCommercialType">-</strong></div>
+              <div class="kpi-item"><p>Procurement</p><strong id="outProcurement">-</strong></div>
+              <div class="kpi-item"><p>Top Revenue Region</p><strong id="outTopRegion">-</strong></div>
             </div>
             <div class="split-card">
               <div class="split-labels">
@@ -1347,7 +1396,12 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
                 <span class="direct" id="directBar"></span>
                 <span class="indirect" id="indirectBar"></span>
               </div>
+              <div class="split-labels">
+                <span>Revenue split</span>
+                <span><strong id="outRevenueSplit">-</strong></span>
+              </div>
             </div>
+            <p class="caption" id="outMajorGeographies">Major geographies: -</p>
           </article>
         </section>
 
@@ -1359,70 +1413,37 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
           <article>
             <h3>Global revenue breakdown</h3>
             <div id="regionBars" class="bar-group"></div>
-            <p class="caption" id="outTopCountries">Priority countries: -</p>
           </article>
         </section>
 
-        <section class="card two-column">
-          <article>
-            <h2>3. Industry Lens</h2>
-            <ul id="industryTrendList" class="bullet-list"></ul>
-            <h3 style="margin-top: 12px;">Analyst and benchmark data</h3>
-            <ul id="analystList" class="bullet-list"></ul>
-          </article>
-          <article>
-            <div class="trend-panel">
-              <h3>Trend signal snapshot</h3>
-              <div class="trend-chart">
-                <div class="trend-col">
-                  <div class="trend-track">
-                    <div id="trendMarketBar" class="trend-fill"></div>
-                  </div>
-                  <span>Market Growth</span>
-                  <strong id="trendMarketValue">0%</strong>
-                </div>
-                <div class="trend-col">
-                  <div class="trend-track">
-                    <div id="trendDigitalBar" class="trend-fill"></div>
-                  </div>
-                  <span>Digital Spend</span>
-                  <strong id="trendDigitalValue">0%</strong>
-                </div>
-                <div class="trend-col">
-                  <div class="trend-track">
-                    <div id="trendRegulatoryBar" class="trend-fill"></div>
-                  </div>
-                  <span>Regulatory Intensity</span>
-                  <strong id="trendRegulatoryValue">0/10</strong>
-                </div>
-              </div>
-            </div>
-          </article>
-        </section>
-
-        <details class="card account-lens" id="accountLensCard" open>
-          <summary>
-            <div>
-              <h2 style="margin: 0;">4. Account Lens</h2>
-              <p class="summary-note">Strategic initiatives and pertinent account intelligence with progressive disclosure.</p>
-            </div>
-            <span class="details-hint">Expand / collapse details</span>
-          </summary>
-          <div class="two-column">
-            <article>
-              <h3>Strategic initiatives</h3>
-              <ul id="initiativeList" class="bullet-list"></ul>
-            </article>
-            <article>
-              <h3>Pertinent account information</h3>
-              <ul id="accountInfoList" class="bullet-list"></ul>
-            </article>
+        <section class="card">
+          <h2 class="section-title">2. ARR spread over major contracts</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>ARR</th>
+                  <th>Type</th>
+                  <th>Term</th>
+                  <th>Next renewal / anniversary</th>
+                  <th>Direct or Indirect</th>
+                </tr>
+              </thead>
+              <tbody id="contractTableBody"></tbody>
+            </table>
           </div>
-        </details>
+        </section>
+
+        <section class="card">
+          <h2 class="section-title">3. Top problems we are solving for the client</h2>
+          <p class="section-subnote">It is okay to have gaps. Call them out directly and use them to drive next actions.</p>
+          <ul id="topProblemsList" class="bullet-list"></ul>
+        </section>
 
         <section class="card two-column">
           <article>
-            <h2>5. Product Whitespace Analysis</h2>
+            <h2 class="section-title">4. Product Whitespace Analysis</h2>
             <div class="donut-wrap">
               <div class="donut" id="whitespaceDonut" role="img" aria-label="Product adoption versus whitespace">
                 <span id="adoptionPercent">0%</span>
@@ -1440,6 +1461,55 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
             <p class="caption" id="whitespaceNotesOut"></p>
           </article>
         </section>
+
+        <details class="card account-lens" open>
+          <summary>
+            <div>
+              <h2 style="margin: 0;">5. Account Lens</h2>
+              <p class="summary-note">Strategic context, relationship status, and pipeline linkage with progressive disclosure.</p>
+            </div>
+            <span class="details-hint">Expand / collapse details</span>
+          </summary>
+          <div class="stack">
+            <div class="two-column">
+              <article>
+                <h3>Strategic initiatives</h3>
+                <ul id="initiativeList" class="bullet-list"></ul>
+              </article>
+              <article>
+                <h3>Pertinent account information</h3>
+                <ul id="accountInfoList" class="bullet-list"></ul>
+              </article>
+            </div>
+
+            <div class="two-column">
+              <article>
+                <h3>Current account health context</h3>
+                <div class="status-grid">
+                  <div class="status-row"><span>Usage of owned capacity</span><strong id="outCapacityUsage">-</strong></div>
+                  <div class="status-row"><span>Level of satisfaction</span><strong id="outSatisfactionLevel">-</strong></div>
+                  <div class="status-row"><span>Major geographies served</span><strong id="outGeographiesServing">-</strong></div>
+                  <div class="status-row"><span>Last top-to-top meeting</span><strong id="outLastTopMeeting">-</strong></div>
+                </div>
+              </article>
+              <article>
+                <h3>Relationship status</h3>
+                <ul id="relationshipStatusList" class="bullet-list compact"></ul>
+              </article>
+            </div>
+
+            <div class="two-column">
+              <article>
+                <h3>Our basic strategy</h3>
+                <ul id="strategyList" class="bullet-list compact"></ul>
+              </article>
+              <article>
+                <h3>Pipeline linked to strategy</h3>
+                <ul id="pipelineList" class="bullet-list compact"></ul>
+              </article>
+            </div>
+          </div>
+        </details>
 
         <section class="card">
           <h2 style="margin: 0;">6. SWOT Analysis</h2>
@@ -1464,16 +1534,27 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
         </section>
 
         <section class="card">
-          <h2 style="margin: 0;">7. Strategic Objectives (SMART)</h2>
+          <h2 style="margin: 0;">7. Strategic Objectives</h2>
           <div id="goalCards" class="goal-grid"></div>
         </section>
 
+        <section class="card">
+          <h2 style="margin: 0;">8. Here is how we need help...</h2>
+          <ul id="helpList" class="bullet-list" style="margin-top: 10px;"></ul>
+          <div class="help-note">
+            I realize we may not know many of these answers at the time we meet. Don't try to hide this, just tell it like
+            it is. Do your homework, but don't worry about making a pretty presentation. Make sure you have PS, Customer
+            Success, and whatever other resources you need in the meeting.
+          </div>
+          <div class="help-note">
+            The tone of the internal meeting is one of collaboration and brainstorming - not the AE defending their
+            position. We are one team.
+          </div>
+        </section>
+
         <section class="card summary-footer">
-          <h2>8. Input and Output Presentation View</h2>
-          <p>
-            This single-screen executive summary is structured top-down for fast scanning. Use presentation mode to hide
-            inputs, or export as PDF for executive and board meeting packs.
-          </p>
+          <h2>Presentation and review notes</h2>
+          <p>Use presentation mode for executive walkthroughs and export PDF for meeting prep packets.</p>
           <p class="timestamp">Last updated: <strong id="lastUpdated">-</strong></p>
         </section>
       </section>
@@ -1486,6 +1567,7 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
       var presentationToggle = document.getElementById("presentationToggle");
       var exportPdf = document.getElementById("exportPdf");
       var productChecks = Array.prototype.slice.call(document.querySelectorAll("[data-product]"));
+      var strategyChecks = Array.prototype.slice.call(document.querySelectorAll("[data-strategy]"));
 
       var usdFormatter = new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -1509,15 +1591,9 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
 
       function formatMoneyShort(value) {
         var absolute = Math.abs(value);
-        if (absolute >= 1000000000) {
-          return "$" + (value / 1000000000).toFixed(1) + "B";
-        }
-        if (absolute >= 1000000) {
-          return "$" + (value / 1000000).toFixed(1) + "M";
-        }
-        if (absolute >= 1000) {
-          return "$" + (value / 1000).toFixed(1) + "K";
-        }
+        if (absolute >= 1000000000) return "$" + (value / 1000000000).toFixed(1) + "B";
+        if (absolute >= 1000000) return "$" + (value / 1000000).toFixed(1) + "M";
+        if (absolute >= 1000) return "$" + (value / 1000).toFixed(1) + "K";
         return usdFormatter.format(value);
       }
 
@@ -1538,7 +1614,7 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
         var list = byId(targetId);
         list.innerHTML = "";
 
-        var rows = items.slice(0, limit || 5);
+        var rows = items.slice(0, limit || 6);
         if (!rows.length) {
           rows = [fallbackText];
         }
@@ -1557,14 +1633,13 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
         var container = byId(containerId);
         container.innerHTML = "";
 
-        var fallbackTotal = total > 0
+        var denominator = total > 0
           ? total
           : items.reduce(function (sum, item) {
               return sum + item.value;
             }, 0);
-
-        if (!fallbackTotal) {
-          fallbackTotal = 1;
+        if (!denominator) {
+          denominator = 1;
         }
 
         items.forEach(function (item, index) {
@@ -1573,12 +1648,10 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
 
           var meta = document.createElement("div");
           meta.className = "bar-meta";
-
           var left = document.createElement("span");
           left.textContent = item.label;
           var right = document.createElement("span");
           right.textContent = formatMoneyShort(item.value);
-
           meta.appendChild(left);
           meta.appendChild(right);
 
@@ -1586,9 +1659,9 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
           track.className = "bar-track";
           var fill = document.createElement("span");
           fill.className = "bar-fill tone-" + ((index % 4) + 1);
-          fill.style.width = clamp((item.value / fallbackTotal) * 100, 0, 100).toFixed(1) + "%";
-
+          fill.style.width = clamp((item.value / denominator) * 100, 0, 100).toFixed(1) + "%";
           track.appendChild(fill);
+
           row.appendChild(meta);
           row.appendChild(track);
           container.appendChild(row);
@@ -1599,14 +1672,6 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
         if (value === "local") return "Local Owner";
         if (value === "global") return "Global Owner";
         return value || "-";
-      }
-
-      function updateProcurementInputState() {
-        var hasCpo = byId("cpoPresent").checked;
-        var reportsLabel = byId("procurementReportsToLabel");
-        var reportsSelect = byId("procurementReportsTo");
-        reportsSelect.disabled = hasCpo;
-        reportsLabel.classList.toggle("is-disabled", hasCpo);
       }
 
       function formatDate(dateValue) {
@@ -1620,80 +1685,73 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
         });
       }
 
-      function renderGoals() {
-        var goals = [];
-        for (var i = 1; i <= 5; i += 1) {
-          var objective = byId("goal" + i + "Objective").value.trim();
-          if (!objective) continue;
+      function updateProcurementInputState() {
+        var hasCpo = byId("cpoPresent").checked;
+        var reportsLabel = byId("procurementReportsToLabel");
+        var reportsSelect = byId("procurementReportsTo");
+        reportsSelect.disabled = hasCpo;
+        reportsLabel.classList.toggle("is-disabled", hasCpo);
+      }
 
-          goals.push({
-            objective: objective,
-            owner: byId("goal" + i + "Owner").value.trim() || "Unassigned",
-            target: byId("goal" + i + "Target").value.trim() || "Target pending",
-            deadline: formatDate(byId("goal" + i + "Deadline").value),
-            source: byId("goal" + i + "Source").value || "SWOT + Whitespace"
+      function updateCsmInputState() {
+        var hasCsm = byId("hasCsm").checked;
+        var csmName = byId("csmName");
+        var csmLabel = byId("csmNameLabel");
+        csmName.disabled = !hasCsm;
+        csmLabel.classList.toggle("is-disabled", !hasCsm);
+      }
+
+      function readContracts() {
+        var contracts = [];
+        for (var i = 1; i <= 4; i += 1) {
+          var product = byId("contract" + i + "Product").value.trim();
+          var arr = parseValue(byId("contract" + i + "Arr").value);
+          var type = byId("contract" + i + "Type").value;
+          var term = byId("contract" + i + "Term").value.trim();
+          var renewal = byId("contract" + i + "Renewal").value;
+          var route = byId("contract" + i + "Route").value;
+
+          if (!product && !arr && !term && !renewal) {
+            continue;
+          }
+
+          contracts.push({
+            product: product || "TBD",
+            arr: arr,
+            type: type || "TBD",
+            term: term || "TBD",
+            renewal: formatDate(renewal),
+            route: route || "TBD"
           });
         }
+        return contracts;
+      }
 
-        var goalContainer = byId("goalCards");
-        goalContainer.innerHTML = "";
+      function renderContractsTable(contracts) {
+        var tbody = byId("contractTableBody");
+        tbody.innerHTML = "";
 
-        if (!goals.length) {
-          var empty = document.createElement("article");
-          empty.className = "goal-card";
-          var emptyTitle = document.createElement("h3");
-          emptyTitle.textContent = "No SMART goals added yet";
-          var emptyText = document.createElement("p");
-          emptyText.className = "goal-objective";
-          emptyText.textContent = "Add up to five SMART goals from the input panel.";
-          empty.appendChild(emptyTitle);
-          empty.appendChild(emptyText);
-          goalContainer.appendChild(empty);
+        if (!contracts.length) {
+          var row = document.createElement("tr");
+          var cell = document.createElement("td");
+          cell.colSpan = 6;
+          cell.className = "muted-item";
+          cell.textContent = "No contract rows provided yet.";
+          row.appendChild(cell);
+          tbody.appendChild(row);
           return;
         }
 
-        goals.forEach(function (goal, index) {
-          var card = document.createElement("article");
-          card.className = "goal-card";
-
-          var title = document.createElement("h3");
-          title.textContent = "Goal " + (index + 1);
-
-          var objective = document.createElement("p");
-          objective.className = "goal-objective";
-          objective.textContent = goal.objective;
-
-          var meta = document.createElement("dl");
-          meta.className = "goal-meta";
-
-          [
-            { label: "Owner", value: goal.owner },
-            { label: "Target", value: goal.target },
-            { label: "Deadline", value: goal.deadline },
-            { label: "Informed by", value: goal.source }
-          ].forEach(function (row) {
-            var line = document.createElement("div");
-            var label = document.createElement("span");
-            label.textContent = row.label;
-            var value = document.createElement("strong");
-            value.textContent = row.value;
-            line.appendChild(label);
-            line.appendChild(value);
-            meta.appendChild(line);
-          });
-
-          card.appendChild(title);
-          card.appendChild(objective);
-          card.appendChild(meta);
-          goalContainer.appendChild(card);
+        contracts.forEach(function (contract) {
+          var row = document.createElement("tr");
+          [contract.product, formatMoneyShort(contract.arr), contract.type, contract.term, contract.renewal, contract.route]
+            .forEach(function (value) {
+              var cell = document.createElement("td");
+              cell.textContent = value;
+              row.appendChild(cell);
+            });
+          tbody.appendChild(row);
         });
-      }
-
-      function renderTrendBar(barId, valueId, rawValue, maxValue, suffix) {
-        var value = clamp(rawValue, 0, maxValue);
-        var percent = maxValue ? (value / maxValue) * 100 : 0;
-        byId(barId).style.height = percent.toFixed(1) + "%";
-        setText(valueId, value.toFixed(1) + suffix);
       }
 
       function renderProductWhitespace() {
@@ -1727,44 +1785,135 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
         });
 
         var generatedOpportunities = whitespace.slice(0, 5).map(function (product) {
-          return "Launch a targeted " + product.name + " expansion motion with a joint executive sponsor.";
+          return "Launch targeted " + product.name + " expansion with an executive sponsor and measurable timeline.";
         });
         renderBulletList(
           "opportunityList",
           generatedOpportunities,
-          "Portfolio coverage is complete. Focus on deeper adoption and value realization.",
+          "Whitespace is limited. Focus on deeper adoption and measurable value realization.",
           5
         );
 
         var notes = byId("whitespaceNotes").value.trim();
         setText(
           "whitespaceNotesOut",
-          notes ? "Whitespace note: " + notes : "Add whitespace notes to frame executive-level opportunity narrative."
+          notes ? "Whitespace note: " + notes : "Add whitespace notes to frame executive opportunities."
+        );
+      }
+
+      function renderGoals() {
+        var goals = [];
+        for (var i = 1; i <= 5; i += 1) {
+          var objective = byId("goal" + i + "Objective").value.trim();
+          if (!objective) continue;
+
+          goals.push({
+            objective: objective,
+            owner: byId("goal" + i + "Owner").value.trim() || "Unassigned",
+            target: byId("goal" + i + "Target").value.trim() || "Target pending",
+            deadline: formatDate(byId("goal" + i + "Deadline").value),
+            source: byId("goal" + i + "Source").value || "SWOT + Whitespace"
+          });
+        }
+
+        var goalContainer = byId("goalCards");
+        goalContainer.innerHTML = "";
+
+        if (!goals.length) {
+          var empty = document.createElement("article");
+          empty.className = "goal-card";
+          var title = document.createElement("h3");
+          title.textContent = "No strategic objectives added yet";
+          var body = document.createElement("p");
+          body.className = "goal-objective";
+          body.textContent = "Add up to five objectives from the input panel.";
+          empty.appendChild(title);
+          empty.appendChild(body);
+          goalContainer.appendChild(empty);
+          return;
+        }
+
+        goals.forEach(function (goal, index) {
+          var card = document.createElement("article");
+          card.className = "goal-card";
+
+          var title = document.createElement("h3");
+          title.textContent = "Goal " + (index + 1);
+          var objective = document.createElement("p");
+          objective.className = "goal-objective";
+          objective.textContent = goal.objective;
+
+          var meta = document.createElement("dl");
+          meta.className = "goal-meta";
+
+          [
+            { label: "Owner", value: goal.owner },
+            { label: "Target", value: goal.target },
+            { label: "Deadline", value: goal.deadline },
+            { label: "Informed by", value: goal.source }
+          ].forEach(function (row) {
+            var line = document.createElement("div");
+            var label = document.createElement("span");
+            label.textContent = row.label;
+            var value = document.createElement("strong");
+            value.textContent = row.value;
+            line.appendChild(label);
+            line.appendChild(value);
+            meta.appendChild(line);
+          });
+
+          card.appendChild(title);
+          card.appendChild(objective);
+          card.appendChild(meta);
+          goalContainer.appendChild(card);
+        });
+      }
+
+      function renderStrategies() {
+        var selected = strategyChecks
+          .filter(function (check) {
+            return check.checked;
+          })
+          .map(function (check) {
+            return check.getAttribute("data-strategy");
+          });
+
+        renderBulletList(
+          "strategyList",
+          selected,
+          "Select at least one strategic approach for this account.",
+          8
         );
       }
 
       function renderSummary() {
         updateProcurementInputState();
+        updateCsmInputState();
 
         var customerName = byId("customerName").value.trim() || "Major Customer";
         var aeName = byId("aeName").value.trim() || "Unassigned";
+        var aeTenure = byId("aeTenure").value.trim() || "Not provided";
         var ownershipType = humanOwnership(byId("ownershipType").value);
         var roleRegion = byId("roleRegion").value.trim() || "Not specified";
         var directManager = byId("directManager").value.trim() || "Not specified";
-        var matrixReporting = byId("matrixReporting").value.trim() || "None";
+        var hasCsm = byId("hasCsm").checked;
+        var csmName = hasCsm ? byId("csmName").value.trim() || "CSM assigned (name pending)" : "No CSM assigned";
+        var highestExecAlignment = byId("highestExecAlignment").value.trim() || "Not specified";
 
         setText("outHeaderCustomer", customerName);
         setText("outAeName", aeName);
+        setText("outAeTenure", aeTenure);
         setText("outOwnershipType", ownershipType);
         setText("outRoleRegion", roleRegion);
         setText("outDirectManager", directManager);
-        setText("outMatrixReporting", matrixReporting);
+        setText("outCsm", csmName);
+        setText("outHighestExecAlignment", highestExecAlignment);
 
         var arrPillars = [
-          { label: "Platform", value: parseValue(byId("arrPillarPlatform").value) },
-          { label: "Security", value: parseValue(byId("arrPillarSecurity").value) },
-          { label: "Data and AI", value: parseValue(byId("arrPillarData").value) },
-          { label: "Services", value: parseValue(byId("arrPillarServices").value) }
+          { label: "Document Workflow Automation", value: parseValue(byId("arrPillarDocumentWorkflow").value) },
+          { label: "AP & AR Automation", value: parseValue(byId("arrPillarApAr").value) },
+          { label: "Print & Workplace Automation", value: parseValue(byId("arrPillarPrintWorkplace").value) },
+          { label: "PDF & eSignature", value: parseValue(byId("arrPillarPdfEsignature").value) }
         ];
         var pillarTotal = arrPillars.reduce(function (sum, pillar) {
           return sum + pillar.value;
@@ -1781,21 +1930,23 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
         var regionTotal = regionData.reduce(function (sum, region) {
           return sum + region.value;
         }, 0);
-        var sortedRegions = regionData.slice().sort(function (a, b) {
-          return b.value - a.value;
-        });
-        var topRegion = sortedRegions[0] && sortedRegions[0].value > 0 ? sortedRegions[0].label : "Not available";
+        var topRegion = regionData
+          .slice()
+          .sort(function (a, b) {
+            return b.value - a.value;
+          })[0];
 
         var employees = parseValue(byId("employees").value);
         var customerRevenue = parseValue(byId("customerTotalRevenue").value);
         var directPercent = clamp(parseValue(byId("directSplit").value), 0, 100);
         var indirectPercent = 100 - directPercent;
+        var commercialType = byId("commercialType").value || "Not specified";
 
         var hasCpo = byId("cpoPresent").checked;
         var procurementReportsTo = byId("procurementReportsTo").value;
         var procurementNotes = byId("procurementNotes").value.trim();
         var procurementSummary = hasCpo
-          ? "CPO in seat (centralized procurement)"
+          ? "CPO in seat"
           : "No CPO - reports to " + procurementReportsTo;
         if (procurementNotes) {
           procurementSummary += ". " + procurementNotes;
@@ -1804,59 +1955,37 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
         setText("outArrTotal", formatMoneyShort(arrTotal));
         setText("outEmployees", integerFormatter.format(employees));
         setText("outCustomerRevenue", formatMoneyShort(customerRevenue));
-        setText("outRevenueSplit", directPercent.toFixed(0) + "% direct / " + indirectPercent.toFixed(0) + "% indirect");
+        setText("outCommercialType", commercialType);
         setText("outProcurement", procurementSummary);
-        setText("outTopRegion", topRegion);
-        setText("outTopCountries", "Priority countries: " + (byId("topCountries").value.trim() || "Not provided"));
+        setText("outTopRegion", topRegion && topRegion.value > 0 ? topRegion.label : "Not available");
 
         setText("directSplitLive", directPercent.toFixed(0) + "%");
         setText("outDirectPercent", directPercent.toFixed(0) + "%");
         setText("outIndirectPercent", indirectPercent.toFixed(0) + "%");
+        setText("outRevenueSplit", directPercent.toFixed(0) + "% direct / " + indirectPercent.toFixed(0) + "% indirect");
+        setText("outMajorGeographies", "Major geographies: " + (byId("majorGeographies").value.trim() || "Not provided"));
         byId("directBar").style.width = directPercent.toFixed(1) + "%";
         byId("indirectBar").style.width = indirectPercent.toFixed(1) + "%";
 
         renderBarGroup("pillarBars", arrPillars, arrTotal);
         renderBarGroup("regionBars", regionData, regionTotal);
 
+        var contracts = readContracts();
+        renderContractsTable(contracts);
+
         renderBulletList(
-          "industryTrendList",
-          readLines("industryTrends"),
-          "Add key industry trends to frame opportunities and threats.",
-          6
-        );
-        renderBulletList(
-          "analystList",
-          readLines("analystBenchmarks"),
-          "Add analyst and benchmark references.",
-          6
+          "topProblemsList",
+          readLines("topProblems"),
+          "Add the top client problems and call out any known gaps.",
+          8
         );
 
-        renderTrendBar(
-          "trendMarketBar",
-          "trendMarketValue",
-          parseValue(byId("marketGrowth").value),
-          20,
-          "%"
-        );
-        renderTrendBar(
-          "trendDigitalBar",
-          "trendDigitalValue",
-          parseValue(byId("digitalGrowth").value),
-          30,
-          "%"
-        );
-        renderTrendBar(
-          "trendRegulatoryBar",
-          "trendRegulatoryValue",
-          parseValue(byId("regulatoryPressure").value),
-          10,
-          "/10"
-        );
+        renderProductWhitespace();
 
         renderBulletList(
           "initiativeList",
           readLines("strategicInitiatives"),
-          "Add strategic initiatives from investor, analyst, or customer transformation plans.",
+          "Add strategic initiatives from investor, analyst, or transformation plans.",
           7
         );
         renderBulletList(
@@ -1866,7 +1995,25 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
           7
         );
 
-        renderProductWhitespace();
+        setText("outCapacityUsage", byId("capacityUsage").value.trim() || "Not provided");
+        setText("outSatisfactionLevel", byId("satisfactionLevel").value.trim() || "Not provided");
+        setText("outGeographiesServing", byId("geographiesServing").value.trim() || "Not provided");
+        setText("outLastTopMeeting", formatDate(byId("lastTopMeeting").value));
+
+        renderBulletList(
+          "relationshipStatusList",
+          readLines("relationshipStatus"),
+          "Add relationship status details across business, IT, InfoSec, AI Lab / COE, and Procurement.",
+          8
+        );
+
+        renderStrategies();
+        renderBulletList(
+          "pipelineList",
+          readLines("strategyPipeline"),
+          "Add pipeline items explicitly linked to selected strategies.",
+          8
+        );
 
         renderBulletList(
           "strengthList",
@@ -1894,6 +2041,14 @@ Regulatory scrutiny can delay new platform rollouts.</textarea>
         );
 
         renderGoals();
+
+        renderBulletList(
+          "helpList",
+          readLines("helpNeeded"),
+          "Add the specific help needed from leadership and cross-functional teams.",
+          8
+        );
+
         setText("lastUpdated", new Date().toLocaleString());
       }
 
