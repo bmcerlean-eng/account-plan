@@ -405,6 +405,10 @@
       letter-spacing: -0.01em;
     }
 
+    .kpi-item.procurement-wide {
+      grid-column: 1 / -1;
+    }
+
     .split-card {
       border: 1px solid var(--border);
       border-radius: 11px;
@@ -960,14 +964,6 @@
                 </span>
                 <input id="directSplit" type="range" min="0" max="100" step="1" value="62" />
               </label>
-              <label>
-                Commercial type focus
-                <select id="commercialType">
-                  <option selected>SaaS</option>
-                  <option>Subscription</option>
-                  <option>Maintenance</option>
-                </select>
-              </label>
             </div>
 
             <div class="stack" style="margin-top: 10px;">
@@ -1183,9 +1179,7 @@ Procurement and legal support for contract consolidation options.</textarea>
               <div class="kpi-item"><p>Current ARR</p><strong id="outArrTotal">$0</strong></div>
               <div class="kpi-item"><p>Employees</p><strong id="outEmployees">0</strong></div>
               <div class="kpi-item"><p>Customer Revenue</p><strong id="outCustomerRevenue">$0</strong></div>
-              <div class="kpi-item"><p>Commercial Type</p><strong id="outCommercialType">-</strong></div>
-              <div class="kpi-item"><p>Procurement</p><strong id="outProcurement">-</strong></div>
-              <div class="kpi-item"><p>Top Revenue Region</p><strong id="outTopRegion">-</strong></div>
+              <div class="kpi-item procurement-wide"><p>Procurement</p><strong id="outProcurement">-</strong></div>
             </div>
             <div class="split-card">
               <div class="split-labels">
@@ -1635,17 +1629,11 @@ Procurement and legal support for contract consolidation options.</textarea>
         var regionTotal = regionData.reduce(function (sum, region) {
           return sum + region.value;
         }, 0);
-        var topRegion = regionData
-          .slice()
-          .sort(function (a, b) {
-            return b.value - a.value;
-          })[0];
 
         var employees = parseValue(byId("employees").value);
         var customerRevenue = parseValue(byId("customerTotalRevenue").value);
         var directPercent = clamp(parseValue(byId("directSplit").value), 0, 100);
         var indirectPercent = 100 - directPercent;
-        var commercialType = byId("commercialType").value || "Not specified";
 
         var hasCpo = byId("cpoPresent").checked;
         var procurementReportsTo = byId("procurementReportsTo").value;
@@ -1660,9 +1648,7 @@ Procurement and legal support for contract consolidation options.</textarea>
         setText("outArrTotal", formatMoneyShort(arrTotal));
         setText("outEmployees", integerFormatter.format(employees));
         setText("outCustomerRevenue", formatMoneyShort(customerRevenue));
-        setText("outCommercialType", commercialType);
         setText("outProcurement", procurementSummary);
-        setText("outTopRegion", topRegion && topRegion.value > 0 ? topRegion.label : "Not available");
 
         setText("directSplitLive", directPercent.toFixed(0) + "%");
         setText("outDirectPercent", directPercent.toFixed(0) + "%");
